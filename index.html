@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bogovich — Индивидуальная встреча с виноделом в Севастополе</title>
+<meta name="description" content="Частная экскурсия на органический виноградник в Севастополе. 2 часа, дегустация, закуски, вина с собой. Только по записи.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --wine:#6B2D3E;
+  --wine-deep:#4A1E2B;
+  --stone:#F7F3EF;
+  --stone-dark:#EDE7E0;
+  --ink:#1C1C1C;
+  --muted:#8A7E74;
+  --gold:#A68B5B;
+  --heading:'Raleway',sans-serif;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Raleway',sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:var(--sans);
+  font-weight:400;
+  color:var(--ink);
+  background:var(--stone);
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:none;background:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* ─── Typography ─── */
+h1,h2,h3,h4{font-family:var(--heading);font-weight:300;line-height:1.15;text-transform:uppercase;letter-spacing:.12em}
+
+h2.section-title{
+  font-size:clamp(2rem,4vw,3rem);
+  margin-bottom:.35em;
+  letter-spacing:-.01em;
+}
+.section-sub{
+  font-size:clamp(.95rem,1.3vw,1.1rem);
+  color:var(--muted);
+  max-width:540px;
+  line-height:1.55;
+}
+.section-head{margin-bottom:3.5rem}
+
+/* ─── Buttons ─── */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:14px 32px;
+  border-radius:100px;
+  font-size:.9375rem;
+  font-weight:500;
+  letter-spacing:.02em;
+  transition:all .35s var(--ease);
+}
+.btn-primary{background:var(--wine);color:#fff}
+.btn-primary:hover{background:var(--wine-deep);transform:translateY(-1px)}
+.btn-secondary{
+  border:1.5px solid var(--ink);
+  color:var(--ink);
+}
+.btn-secondary:hover{background:var(--ink);color:#fff}
+.btn-wine-outline{border:1.5px solid var(--wine);color:var(--wine)}
+.btn-wine-outline:hover{background:var(--wine);color:#fff}
+
+/* ─── Nav ─── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:20px 0;
+  transition:all .4s var(--ease);
+}
+.nav.scrolled{
+  background:rgba(247,243,239,.92);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  padding:14px 0;
+  box-shadow:0 1px 0 rgba(0,0,0,.06);
+}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{
+  font-family:var(--heading);
+  font-size:1.5rem;
+  font-weight:400;
+  text-transform:uppercase;
+  letter-spacing:.2em;
+  letter-spacing:.04em;
+  color:#fff;
+  transition:color .4s var(--ease);
+}
+.nav.scrolled .nav-logo{color:var(--ink)}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{
+  font-size:.875rem;
+  font-weight:500;
+  color:rgba(255,255,255,.8);
+  transition:color .3s;
+}
+.nav.scrolled .nav-links a{color:var(--muted)}
+.nav-links a:hover{color:#fff}
+.nav.scrolled .nav-links a:hover{color:var(--ink)}
+.nav-cta{
+  padding:9px 22px;
+  border-radius:100px;
+  background:rgba(255,255,255,.15);
+  color:#fff !important;
+  backdrop-filter:blur(10px);
+  font-size:.8125rem;
+  font-weight:500;
+  letter-spacing:.03em;
+  transition:all .35s var(--ease);
+}
+.nav.scrolled .nav-cta{background:var(--wine);color:#fff !important}
+.nav-cta:hover{background:rgba(255,255,255,.25)}
+.nav.scrolled .nav-cta:hover{background:var(--wine-deep)}
+.nav-burger{display:none;flex-direction:column;gap:5px;width:24px;cursor:pointer}
+.nav-burger span{display:block;height:1.5px;background:#fff;border-radius:1px;transition:all .3s}
+.nav.scrolled .nav-burger span{background:var(--ink)}
+
+/* ─── Hero ─── */
+.hero{
+  position:relative;
+  min-height:100svh;
+  display:flex;
+  align-items:flex-end;
+  padding-bottom:clamp(60px,10vh,120px);
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:url('https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=1920&q=80&auto=format') center/cover no-repeat;
+}
+.hero-bg::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(28,28,28,.15) 0%,
+    rgba(28,28,28,.1) 40%,
+    rgba(28,28,28,.55) 100%
+  );
+}
+.hero-content{
+  position:relative;z-index:1;
+  max-width:680px;
+  color:#fff;
+}
+.hero-tag{
+  display:inline-block;
+  font-size:.75rem;
+  font-weight:500;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  margin-bottom:24px;
+  opacity:0;
+  transform:translateY(20px);
+  animation:heroIn .8s var(--ease) .3s forwards;
+}
+.hero h1{
+  font-size:clamp(2.2rem,5vw,3.8rem);
+  line-height:1.08;
+  margin-bottom:20px;
+  letter-spacing:-.015em;
+  opacity:0;
+  transform:translateY(30px);
+  animation:heroIn .9s var(--ease) .5s forwards;
+}
+.hero-desc{
+  font-size:clamp(.95rem,1.2vw,1.1rem);
+  line-height:1.6;
+  color:rgba(255,255,255,.85);
+  max-width:520px;
+  margin-bottom:36px;
+  opacity:0;
+  transform:translateY(20px);
+  animation:heroIn .8s var(--ease) .7s forwards;
+}
+.hero-actions{
+  display:flex;gap:16px;flex-wrap:wrap;
+  opacity:0;
+  transform:translateY(20px);
+  animation:heroIn .8s var(--ease) .9s forwards;
+}
+@keyframes heroIn{to{opacity:1;transform:translateY(0)}}
+
+/* ─── Reveal ─── */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ─── Section spacing ─── */
+section{padding:clamp(80px,10vw,140px) 0}
+
+/* ─── Value Section ─── */
+.value-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:48px 64px;
+}
+.value-item{display:flex;gap:16px;align-items:flex-start}
+.value-icon{
+  flex-shrink:0;
+  width:40px;height:40px;
+  border-radius:50%;
+  background:var(--wine);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:1.1rem;
+  margin-top:2px;
+}
+.value-item h3{
+  font-size:1.15rem;
+  margin-bottom:6px;
+  font-weight:500;
+}
+.value-item p{
+  font-size:.9375rem;
+  color:var(--muted);
+  line-height:1.55;
+}
+
+/* ─── Journey Section ─── */
+.journey{background:#fff}
+.journey-steps{
+  display:grid;
+  gap:0;
+  position:relative;
+  max-width:640px;
+}
+.journey-step{
+  display:grid;
+  grid-template-columns:48px 1fr;
+  gap:20px;
+  padding-bottom:48px;
+  position:relative;
+}
+.journey-step:last-child{padding-bottom:0}
+.step-marker{
+  display:flex;flex-direction:column;align-items:center;
+}
+.step-dot{
+  width:12px;height:12px;
+  border-radius:50%;
+  background:var(--wine);
+  flex-shrink:0;
+  margin-top:6px;
+}
+.step-line{
+  width:1.5px;
+  flex:1;
+  background:var(--stone-dark);
+  margin-top:12px;
+}
+.journey-step:last-child .step-line{display:none}
+.step-content h3{
+  font-size:1.15rem;
+  margin-bottom:6px;
+  font-weight:500;
+}
+.step-content p{
+  font-size:.9375rem;
+  color:var(--muted);
+  line-height:1.55;
+}
+
+/* ─── Pricing Section ─── */
+.pricing-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:32px;
+  align-items:start;
+}
+@media(max-width:768px){.pricing-grid{grid-template-columns:1fr}}
+.pricing-block{
+  border:1.5px solid var(--stone-dark);
+  border-radius:16px;
+  padding:clamp(32px,5vw,56px);
+  background:#fff;
+}
+.pricing-block.featured{
+  border-color:var(--wine);
+  position:relative;
+}
+.pricing-badge{
+  position:absolute;
+  top:-13px;left:32px;
+  background:var(--wine);
+  color:#fff;
+  font-size:.7rem;
+  font-weight:500;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  padding:5px 16px;
+  border-radius:100px;
+}
+.pricing-block h3{
+  font-size:clamp(1.5rem,3vw,2.2rem);
+  margin-bottom:8px;
+}
+.pricing-price{
+  font-family:var(--heading);
+  font-weight:300;
+  font-size:clamp(2rem,4vw,3rem);
+  color:var(--wine);
+  font-weight:600;
+  margin-bottom:4px;
+}
+.pricing-note{
+  font-size:.875rem;
+  color:var(--muted);
+  margin-bottom:32px;
+}
+.pricing-includes{
+  list-style:none;
+  display:grid;
+  gap:14px;
+  margin-bottom:40px;
+}
+.pricing-includes li{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  font-size:.9375rem;
+  line-height:1.5;
+}
+.pricing-includes li::before{
+  content:'✓';
+  flex-shrink:0;
+  color:var(--wine);
+  font-weight:600;
+  margin-top:1px;
+}
+.pricing-extra{
+  padding-top:24px;
+  border-top:1px solid var(--stone-dark);
+  font-size:.9375rem;
+  color:var(--muted);
+  line-height:1.6;
+}
+.pricing-extra strong{color:var(--ink)}
+
+/* ─── About Section ─── */
+.about{background:#fff}
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:clamp(40px,6vw,80px);
+  align-items:center;
+}
+.about-image{
+  aspect-ratio:4/5;
+  border-radius:12px;
+  overflow:hidden;
+}
+.about-image img{width:100%;height:100%;object-fit:cover}
+.about-text h2{margin-bottom:24px}
+.about-text .lead{
+  font-family:var(--serif);
+  font-size:clamp(1.1rem,1.5vw,1.35rem);
+  font-style:italic;
+  color:var(--wine);
+  line-height:1.45;
+  margin-bottom:24px;
+}
+.about-text p{
+  font-size:.9375rem;
+  color:var(--muted);
+  line-height:1.7;
+  margin-bottom:16px;
+}
+.about-text p:last-child{margin-bottom:0}
+
+/* ─── Organic Section ─── */
+.organic-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:clamp(40px,6vw,80px);
+  align-items:center;
+}
+.organic-images{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.organic-images .img-tall{
+  grid-row:span 2;
+  aspect-ratio:3/5;
+  border-radius:12px;
+  overflow:hidden;
+}
+.organic-images .img-sq{
+  aspect-ratio:1;
+  border-radius:12px;
+  overflow:hidden;
+}
+.organic-images img{width:100%;height:100%;object-fit:cover}
+.organic-text h2{margin-bottom:24px}
+.organic-text p{
+  font-size:.9375rem;
+  color:var(--muted);
+  line-height:1.7;
+  margin-bottom:16px;
+}
+.organic-principles{
+  list-style:none;
+  margin-top:24px;
+  display:grid;
+  gap:12px;
+}
+.organic-principles li{
+  display:flex;gap:12px;
+  font-size:.9375rem;
+  line-height:1.5;
+}
+.organic-principles li::before{
+  content:'●';
+  color:var(--wine);
+  flex-shrink:0;
+  font-size:.5rem;
+  margin-top:7px;
+}
+
+/* ─── Wines Section ─── */
+.wines{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  padding:0;
+}
+.wines-bg{
+  position:absolute;inset:0;
+  background:url('img/winesbg.png') center/cover no-repeat;
+}
+.wines .wrap{position:relative;z-index:1;width:100%;max-width:none;padding:clamp(80px,10vw,140px) 0;display:grid;grid-template-columns:1fr 1fr}
+.wines-content{grid-column:2;justify-self:center}
+.wines-content{
+  max-width:480px;
+  color:#2A1810;
+}
+.wines-content .section-title{color:#2A1810}
+.wines-content .section-sub{color:#4A3228}
+.wines-list{display:grid;gap:36px}
+.wine-line h3{
+  font-size:1.3rem;
+  margin-bottom:8px;
+  color:#2A1810;
+}
+.wine-line p{
+  font-size:.9375rem;
+  color:#4A3228;
+  line-height:1.6;
+}
+.wine-line .tag{
+  display:inline-block;
+  margin-top:12px;
+  font-size:.75rem;
+  font-weight:500;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:#2A1810;
+  padding:4px 12px;
+  border:1px solid rgba(42,24,16,.3);
+  border-radius:100px;
+}
+@media(max-width:768px){
+  .wines{min-height:auto}
+  .wines .wrap{justify-content:stretch}
+  .wines-content{max-width:100%}
+}
+
+/* ─── Team Section ─── */
+.team-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:40px;
+}
+.team-member .team-photo{
+  aspect-ratio:3/4;
+  border-radius:12px;
+  overflow:hidden;
+  margin-bottom:16px;
+  background:var(--stone-dark);
+}
+.team-member .team-photo img{width:100%;height:100%;object-fit:cover}
+.team-member h3{
+  font-size:1.1rem;
+  margin-bottom:4px;
+}
+.team-member p{
+  font-size:.875rem;
+  color:var(--muted);
+}
+
+/* ─── FAQ Section ─── */
+.faq{background:#fff}
+.faq-list{max-width:700px}
+.faq-item{border-bottom:1px solid var(--stone-dark)}
+.faq-q{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:24px 0;
+  font-family:var(--heading);
+  font-size:1.15rem;
+  cursor:pointer;
+  width:100%;
+  text-align:left;
+  gap:16px;
+}
+.faq-q::after{
+  content:'+';
+  font-family:var(--heading);
+  font-size:1.5rem;
+  font-weight:300;
+  color:var(--muted);
+  transition:transform .35s var(--ease);
+  flex-shrink:0;
+}
+.faq-item.open .faq-q::after{transform:rotate(45deg)}
+.faq-a{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .4s var(--ease),padding .4s var(--ease);
+}
+.faq-item.open .faq-a{max-height:300px;padding-bottom:24px}
+.faq-a p{
+  font-size:.9375rem;
+  color:var(--muted);
+  line-height:1.65;
+}
+
+/* ─── Contact / Footer CTA ─── */
+.contact{
+  background:var(--ink);
+  color:#fff;
+  text-align:center;
+}
+.contact h2{color:#fff;margin-bottom:16px}
+.contact .section-sub{
+  color:rgba(255,255,255,.6);
+  margin:0 auto 40px;
+}
+.contact-actions{
+  display:flex;gap:16px;justify-content:center;flex-wrap:wrap;
+  margin-bottom:48px;
+}
+.contact .btn-primary{background:var(--wine)}
+.contact .btn-primary:hover{background:var(--wine-deep)}
+.contact .btn-secondary{border-color:rgba(255,255,255,.3);color:#fff}
+.contact .btn-secondary:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.5)}
+.contact-details{
+  display:flex;gap:48px;justify-content:center;flex-wrap:wrap;
+  padding-top:48px;
+  border-top:1px solid rgba(255,255,255,.1);
+  font-size:.875rem;
+  color:rgba(255,255,255,.5);
+}
+.contact-details a{
+  color:rgba(255,255,255,.7);
+  transition:color .3s;
+}
+.contact-details a:hover{color:#fff}
+.contact-rules{
+  margin-top:40px;
+  font-size:.8125rem;
+  color:rgba(255,255,255,.35);
+  max-width:480px;
+  margin-left:auto;
+  margin-right:auto;
+  line-height:1.6;
+}
+
+/* ─── Footer ─── */
+footer{
+  background:var(--ink);
+  padding:24px 0;
+  border-top:1px solid rgba(255,255,255,.06);
+  text-align:center;
+  font-size:.75rem;
+  color:rgba(255,255,255,.25);
+}
+
+/* ─── Mobile ─── */
+@media(max-width:768px){
+  .nav-links{
+    display:none;
+    position:fixed;inset:0;
+    background:rgba(28,28,28,.97);
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:32px;
+    z-index:200;
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{font-size:1.25rem;color:rgba(255,255,255,.8)}
+  .nav-burger{display:flex;z-index:300}
+  .about-grid,.organic-grid{grid-template-columns:1fr}
+  .about-image{max-height:400px}
+  .organic-images{grid-template-columns:1fr 1fr}
+  .organic-images .img-tall{grid-row:span 1;aspect-ratio:1}
+  .team-grid{grid-template-columns:1fr 1fr}
+  .hero{align-items:center;padding-bottom:0;text-align:center}
+  .hero-content{max-width:100%}
+  .hero-desc{margin-left:auto;margin-right:auto}
+  .hero-actions{justify-content:center}
+}
+@media(max-width:480px){
+  .team-grid{grid-template-columns:1fr}
+  .value-grid{grid-template-columns:1fr}
+  .contact-details{flex-direction:column;gap:24px;align-items:center}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── Nav ─── -->
+<nav class="nav" id="nav">
+  <div class="wrap">
+    <a href="#" class="nav-logo">Bogovich</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#value">О визите</a>
+      <a href="#journey">Экскурсия</a>
+      <a href="#pricing">Цены</a>
+      <a href="#about">История</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact" class="nav-cta">Записаться</a>
+    </div>
+    <button class="nav-burger" id="burger" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ─── Hero ─── -->
+<section class="hero">
+  <div class="hero-bg" role="img" aria-label="Виноградник в Севастополе"></div>
+  <div class="wrap">
+    <div class="hero-content">
+      <span class="hero-tag">Севастополь · Органический виноградник</span>
+      <h1>Индивидуальная встреча с&nbsp;виноделом</h1>
+      <p class="hero-desc">2&nbsp;часа на&nbsp;частном винограднике: прогулка, дегустация 4–6&nbsp;образцов с&nbsp;закусками, вина в&nbsp;бутылках с&nbsp;собой. Группы 4–16&nbsp;гостей, только по&nbsp;записи.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Записаться</a>
+        <a href="#journey" class="btn btn-secondary" style="border-color:rgba(255,255,255,.5);color:#fff">Как проходит экскурсия</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Value ─── -->
+<section id="value">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2 class="section-title">Что вы получаете</h2>
+      <p class="section-sub">Не&nbsp;групповая экскурсия, а&nbsp;частный визит к&nbsp;виноделу — индивидуально под&nbsp;вас.</p>
+    </div>
+    <div class="value-grid">
+      <div class="value-item reveal">
+        <div class="value-icon">①</div>
+        <div>
+          <h3>Индивидуальный формат</h3>
+          <p>Только ваша компания. Никаких сборных групп и&nbsp;случайных попутчиков.</p>
+        </div>
+      </div>
+      <div class="value-item reveal">
+        <div class="value-icon">②</div>
+        <div>
+          <h3>Подача под уровень гостей</h3>
+          <p>От&nbsp;новичков до&nbsp;профессионалов — программа адаптируется под ваш опыт и&nbsp;интерес.</p>
+        </div>
+      </div>
+      <div class="value-item reveal">
+        <div class="value-icon">③</div>
+        <div>
+          <h3>Дегустация с&nbsp;закусками</h3>
+          <p>4–6&nbsp;образцов вина с&nbsp;подобранными закусками. Полноценный опыт, а&nbsp;не&nbsp;формальная проба.</p>
+        </div>
+      </div>
+      <div class="value-item reveal">
+        <div class="value-icon">④</div>
+        <div>
+          <h3>Вечер у&nbsp;винодела</h3>
+          <p>Домашняя атмосфера частного виноградника. Терраса, сад, лаванда — в&nbsp;зависимости от&nbsp;сезона.</p>
+        </div>
+      </div>
+      <div class="value-item reveal">
+        <div class="value-icon">⑤</div>
+        <div>
+          <h3>Вина с&nbsp;собой</h3>
+          <p>Полные бутылки, которые вы&nbsp;выбираете по&nbsp;итогам дегустации. Увозите впечатление.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Journey ─── -->
+<section class="journey" id="journey">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2 class="section-title">Как проходит экскурсия</h2>
+      <p class="section-sub">Два часа, которые меняют представление о&nbsp;севастопольском вине.</p>
+    </div>
+    <div class="journey-steps">
+      <div class="journey-step reveal">
+        <div class="step-marker"><div class="step-dot"></div><div class="step-line"></div></div>
+        <div class="step-content">
+          <h3>Знакомство на террасе</h3>
+          <p>Встреча с&nbsp;Ириной. История пути от&nbsp;города к&nbsp;виноградарству. Панорама долины.</p>
+        </div>
+      </div>
+      <div class="journey-step reveal">
+        <div class="step-marker"><div class="step-dot"></div><div class="step-line"></div></div>
+        <div class="step-content">
+          <h3>Прогулка по винограднику</h3>
+          <p>Лозы, лаванда, сад — в&nbsp;зависимости от&nbsp;времени года. Как устроено органическое хозяйство и&nbsp;почему это важно.</p>
+        </div>
+      </div>
+      <div class="journey-step reveal">
+        <div class="step-marker"><div class="step-dot"></div><div class="step-line"></div></div>
+        <div class="step-content">
+          <h3>Органическое виноградарство</h3>
+          <p>Здоровая ягода без химии. Как получается вино, которое отражает почву и&nbsp;климат.</p>
+        </div>
+      </div>
+      <div class="journey-step reveal">
+        <div class="step-marker"><div class="step-dot"></div><div class="step-line"></div></div>
+        <div class="step-content">
+          <h3>Аперитив на&nbsp;ходу</h3>
+          <p>Сезонный бокал среди виноградных рядов — если позволяет погода и&nbsp;настроение.</p>
+        </div>
+      </div>
+      <div class="journey-step reveal">
+        <div class="step-marker"><div class="step-dot"></div><div class="step-line"></div></div>
+        <div class="step-content">
+          <h3>Дегустация с&nbsp;закусками</h3>
+          <p>Терраса или домик. 4–6&nbsp;вин с&nbsp;историей каждого, технологией и&nbsp;подобранными закусками. Главное событие визита.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Pricing ─── -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2 class="section-title">Формат и&nbsp;стоимость</h2>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-block reveal">
+        <h3>Экскурсия с&nbsp;дегустацией</h3>
+        <div class="pricing-price">от 9 000 ₽ <span style="font-size:.5em;font-weight:400;color:var(--muted)">/ чел.</span></div>
+        <p class="pricing-note">Минимальная сумма — за&nbsp;двоих гостей. Средняя группа — 4&nbsp;человека, максимум ~16.</p>
+        <ul class="pricing-includes">
+          <li>2&nbsp;часа на&nbsp;частном винограднике</li>
+          <li>Прогулка, рассказ, полная программа</li>
+          <li>Дегустация 4–6&nbsp;образцов</li>
+          <li>Закуски к&nbsp;дегустации</li>
+          <li>Вина в&nbsp;бутылках с&nbsp;собой</li>
+          <li>Только ваша компания, без посторонних</li>
+        </ul>
+        <a href="#contact" class="btn btn-wine-outline" style="width:100%;justify-content:center">Забронировать</a>
+      </div>
+      <div class="pricing-block featured reveal">
+        <span class="pricing-badge">С ужином</span>
+        <h3>Экскурсия + гастро-ужин</h3>
+        <div class="pricing-price">от 16 000 ₽ <span style="font-size:.5em;font-weight:400;color:var(--muted)">/ чел.</span></div>
+        <p class="pricing-note">Расширенный формат с&nbsp;авторской кухней от&nbsp;повара.</p>
+        <ul class="pricing-includes">
+          <li>Всё из&nbsp;базовой программы</li>
+          <li>Гастро-ужин с&nbsp;поваром</li>
+          <li>Авторские блюда, подобранные под&nbsp;вина</li>
+          <li>Расширенная дегустация</li>
+          <li>Увеличенная продолжительность</li>
+          <li>По&nbsp;предварительной договорённости</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary" style="width:100%;justify-content:center">Забронировать</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── About ─── -->
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-image reveal">
+        <img src="https://images.unsplash.com/photo-1559662780-c3bab6f7e00b?w=800&q=80&auto=format" alt="Ирина Bogovich — винодел" loading="lazy">
+      </div>
+      <div class="about-text reveal">
+        <h2 class="section-title">Ирина Bogovich</h2>
+        <p class="lead">«Первое свидание с&nbsp;вином случилось не&nbsp;в&nbsp;бокале, а&nbsp;в&nbsp;почве. Я&nbsp;поняла, что хочу делать вино, когда впервые увидела, как лоза отвечает на&nbsp;заботу.»</p>
+        <p>Путь в&nbsp;виноделие начался нетипично — через консалтинг, Францию и&nbsp;бордоские практики. Потом — решение уйти из&nbsp;города и&nbsp;строить собственный виноградник в&nbsp;Севастополе.</p>
+        <p>Образование и&nbsp;опыт: стажировки в&nbsp;Бордо, консалтинг винодельческих проектов, органическое виноградарство с&nbsp;нуля. Сегодня — собственный виноградник, вина под маркой Bogovich и&nbsp;репутация одного из&nbsp;самых внимательных севастопольских виноделов.</p>
+        <p>Каждый визит — это встреча с&nbsp;человеком, который делает вино руками и&nbsp;головой. Не&nbsp;экскурсовод, а&nbsp;автор.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Organic ─── -->
+<section id="organic">
+  <div class="wrap">
+    <div class="organic-grid">
+      <div class="organic-text reveal">
+        <h2 class="section-title">Органические Принципы</h2>
+        <p>Виноград растёт без пестицидов, гербицидов и&nbsp;искусственных удобрений. Это сложнее и&nbsp;дороже, но&nbsp;даёт вино с&nbsp;характером — честное отражение почвы, сезона и&nbsp;ручного труда.</p>
+        <p>Органика — это не&nbsp;маркетинг, а&nbsp;философия. Здоровая ягода даёт чистое сусло, минимум вмешательства в&nbsp;винодельне и&nbsp;вкус, который невозможно подделать.</p>
+        <ul class="organic-principles">
+          <li>Без пестицидов и&nbsp;гербицидов</li>
+          <li>Ручной уход за&nbsp;каждой лозой</li>
+          <li>Здоровая почва — основа вкуса</li>
+          <li>Минимальное вмешательство при производстве</li>
+          <li>Терруарность: вино = место + год</li>
+        </ul>
+      </div>
+      <div class="organic-images reveal">
+        <div class="img-tall">
+          <img src="https://images.unsplash.com/photo-1464638681168-8e513d42b8db?w=600&q=80&auto=format" alt="Работа на винограднике" loading="lazy">
+        </div>
+        <div class="img-sq">
+          <img src="https://images.unsplash.com/photo-1589461526563-3f7b0dc0c65d?w=400&q=80&auto=format" alt="Виноград на лозе" loading="lazy">
+        </div>
+        <div class="img-sq">
+          <img src="https://images.unsplash.com/photo-1597916829826-02e5bb4a54e0?w=400&q=80&auto=format" alt="Винодельня" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Wines ─── -->
+<section class="wines" id="wines">
+  <div class="wines-bg" role="img" aria-label="Вина Bogovich"></div>
+  <div class="wrap">
+    <div class="wines-content reveal">
+      <div class="section-head">
+        <h2 class="section-title">Вина</h2>
+        <p class="section-sub">Небольшие тиражи, ручной сбор, минимальное вмешательство. Каждая бутылка — отражение конкретного года и&nbsp;участка.</p>
+      </div>
+      <div class="wines-list">
+        <div class="wine-line">
+          <h3>Классическая линейка</h3>
+          <p>Сортовые и&nbsp;ассамбляжные вина из&nbsp;органического винограда. Выдержка в&nbsp;дубе и&nbsp;стали, тираж ограничен.</p>
+        </div>
+        <div class="wine-line">
+          <h3>ART-линейка</h3>
+          <p>Авторские эксперименты: нестандартные сорта, необычная выдержка, коллаборации с&nbsp;художниками на&nbsp;этикетках.</p>
+          <span class="tag">Лимитированная серия</span>
+        </div>
+        <div class="wine-line">
+          <h3>Игристое</h3>
+          <p>Новый проект — игристое вино, вдохновлённое балетом. Изящество, точность, праздник.</p>
+          <span class="tag">В разработке</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Team ─── -->
+<section id="team">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2 class="section-title">Команда</h2>
+      <p class="section-sub">Люди, которые делают Bogovich возможным — каждый день.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-member reveal">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80&auto=format" alt="Ирина" loading="lazy">
+        </div>
+        <h3>Ирина</h3>
+        <p>Винодел, основатель</p>
+      </div>
+      <div class="team-member reveal">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80&auto=format" alt="Оля" loading="lazy">
+        </div>
+        <h3>Оля</h3>
+        <p>Виноградарство, организация визитов</p>
+      </div>
+      <div class="team-member reveal">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80&auto=format" alt="Лиза" loading="lazy">
+        </div>
+        <h3>Лиза</h3>
+        <p>Дегустации, работа с&nbsp;гостями</p>
+      </div>
+      <div class="team-member reveal">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80&auto=format" alt="Максим" loading="lazy">
+        </div>
+        <h3>Максим</h3>
+        <p>Винодельня, производство</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ─── -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2 class="section-title">Частые вопросы</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q">Почему только по записи и&nbsp;предоплате?</button>
+        <div class="faq-a"><p>Мы&nbsp;готовим каждый визит индивидуально: подбираем программу, закупаем продукты, выделяем время. Предоплата гарантирует, что подготовка не&nbsp;пройдёт впустую.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Сколько длится экскурсия?</button>
+        <div class="faq-a"><p>Около 2&nbsp;часов. Иногда дольше — зависит от&nbsp;компании и&nbsp;настроения. Мы&nbsp;не&nbsp;торопим.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Что если нас двое? А&nbsp;если десять?</button>
+        <div class="faq-a"><p>Минимум — 2&nbsp;человека (минимальная сумма за&nbsp;двоих). Средняя группа — 4&nbsp;человека. Максимум — около&nbsp;16. Для больших компаний обсуждаем формат отдельно.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Можно ли новичкам?</button>
+        <div class="faq-a"><p>Конечно. Программа адаптируется: от&nbsp;базового знакомства с&nbsp;вином до&nbsp;профессионального разбора. Вам не&nbsp;нужно ничего знать заранее.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Можно ли с&nbsp;детьми, за&nbsp;рулём или без алкоголя?</button>
+        <div class="faq-a"><p>Обсуждается индивидуально. Напишите нам, и&nbsp;мы&nbsp;подберём комфортный формат для вашей ситуации.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Как добраться и&nbsp;где встречаемся?</button>
+        <div class="faq-a"><p>Точное место и&nbsp;маршрут присылаем после подтверждения записи. Виноградник находится в&nbsp;Севастополе, добраться удобно на&nbsp;автомобиле.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Contact ─── -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="reveal">
+      <h2 class="section-title">Записаться на&nbsp;визит</h2>
+      <p class="section-sub">Выберите удобный способ связи. Мы&nbsp;ответим в&nbsp;течение дня и&nbsp;подберём дату.</p>
+    </div>
+    <div class="contact-actions reveal">
+      <a href="https://wa.me/" class="btn btn-primary">WhatsApp</a>
+      <a href="https://t.me/" class="btn btn-primary">Telegram</a>
+      <a href="tel:" class="btn btn-secondary">Позвонить</a>
+    </div>
+    <div class="contact-details reveal">
+      <div>
+        <a href="https://yandex.ru/maps/" target="_blank" rel="noopener">Яндекс Карты →</a>
+      </div>
+      <div>
+        <a href="https://maps.google.com/" target="_blank" rel="noopener">Google Maps →</a>
+      </div>
+      <div>
+        <a href="mailto:info@bogovich.ru">info@bogovich.ru</a>
+      </div>
+    </div>
+    <p class="contact-rules reveal">Визит — по&nbsp;предварительной договорённости и&nbsp;предоплате. Мы&nbsp;готовим каждую встречу индивидуально, поэтому спонтанные визиты невозможны.</p>
+  </div>
+</section>
+
+<!-- ─── Footer ─── -->
+<footer>
+  <div class="wrap">© Bogovich, 2026</div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+burger.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => navLinks.classList.remove('open'));
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-q').addEventListener('click', () => {
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>
