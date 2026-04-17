@@ -11,13 +11,16 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --wine:#6B2D3E;
-  --wine-deep:#4A1E2B;
+  --wine:#863C57;
+  --wine-deep:#701939;
+  --eldberry:#5C1B3B;
   --stone:#F7F3EF;
   --stone-dark:#EDE7E0;
   --ink:#1C1C1C;
   --muted:#8A7E74;
-  --gold:#A68B5B;
+  --gold:#847530;
+  --grass:#847530;
+  --deep-green:#5D4E17;
   --heading:'Raleway',sans-serif;
   --serif:'Cormorant Garamond',Georgia,serif;
   --sans:'Raleway',sans-serif;
@@ -36,7 +39,7 @@ body{
 img{display:block;max-width:100%;height:auto}
 a{color:inherit;text-decoration:none}
 button{font:inherit;cursor:pointer;border:none;background:none}
-.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.wrap{width:100%;max-width:1120px;margin:0 auto;padding:0 24px}
 
 /* ─── Typography ─── */
 h1,h2,h3,h4{font-family:var(--heading);font-weight:300;line-height:1.15;text-transform:uppercase;letter-spacing:.12em}
@@ -140,7 +143,11 @@ h2.section-title{
 }
 .hero-bg{
   position:absolute;inset:0;
-  background:url('https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=1920&q=80&auto=format') center/cover no-repeat;
+  background:#1C1C1C;
+}
+.hero-bg video{
+  width:100%;height:100%;
+  object-fit:cover;
 }
 .hero-bg::after{
   content:'';position:absolute;inset:0;
@@ -202,6 +209,7 @@ h2.section-title{
 section{padding:clamp(80px,10vw,140px) 0}
 
 /* ─── Value Section ─── */
+#value{background:#fff}
 .value-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
@@ -229,7 +237,7 @@ section{padding:clamp(80px,10vw,140px) 0}
 }
 
 /* ─── Journey Section ─── */
-.journey{background:#fff}
+.journey{background:var(--stone)}
 .journey-steps{
   display:grid;
   gap:0;
@@ -270,6 +278,82 @@ section{padding:clamp(80px,10vw,140px) 0}
   font-size:.9375rem;
   color:var(--muted);
   line-height:1.55;
+}
+
+/* ─── Gallery Section ─── */
+.gallery{background:#fff;overflow:hidden}
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  grid-auto-rows:280px;
+  gap:8px;
+}
+.gallery-grid .g-item{
+  border-radius:8px;
+  overflow:hidden;
+  cursor:pointer;
+  position:relative;
+}
+.gallery-grid .g-item img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .6s var(--ease);
+}
+.gallery-grid .g-item:hover img{transform:scale(1.05)}
+.gallery-grid .g-wide{grid-column:span 2}
+.gallery-grid .g-tall{grid-row:span 2}
+
+/* Lightbox */
+.lightbox{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(0,0,0,.92);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  cursor:zoom-out;
+  opacity:0;
+  transition:opacity .3s var(--ease);
+}
+.lightbox.active{display:flex;opacity:1}
+.lightbox img{
+  max-width:90vw;max-height:90vh;
+  border-radius:8px;
+  object-fit:contain;
+  cursor:default;
+}
+.lightbox-close{
+  position:absolute;top:20px;right:24px;
+  color:#fff;font-size:2rem;font-weight:300;
+  cursor:pointer;opacity:.6;transition:opacity .3s;
+  z-index:1001;
+  line-height:1;
+}
+.lightbox-close:hover{opacity:1}
+.lightbox-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  color:#fff;font-size:2.5rem;font-weight:300;
+  cursor:pointer;opacity:.5;transition:opacity .3s;
+  padding:16px;user-select:none;z-index:1001;
+  line-height:1;
+}
+.lightbox-nav:hover{opacity:1}
+.lightbox-prev{left:12px}
+.lightbox-next{right:12px}
+
+@media(max-width:768px){
+  .gallery-grid{
+    grid-template-columns:repeat(2,1fr);
+    grid-auto-rows:200px;
+  }
+  .gallery-grid .g-wide{grid-column:span 2}
+  .gallery-grid .g-tall{grid-row:span 1}
+}
+@media(max-width:480px){
+  .gallery-grid{
+    grid-template-columns:1fr 1fr;
+    grid-auto-rows:180px;
+    gap:6px;
+  }
 }
 
 /* ─── Pricing Section ─── */
@@ -440,7 +524,7 @@ section{padding:clamp(80px,10vw,140px) 0}
 }
 .wines-bg{
   position:absolute;inset:0;
-  background:url('img/winesbg.png') center/cover no-repeat;
+  background:url('img/winesbg.webp') center/cover no-repeat;
 }
 .wines .wrap{position:relative;z-index:1;width:100%;max-width:none;padding:clamp(80px,10vw,140px) 0;display:grid;grid-template-columns:1fr 1fr}
 .wines-content{grid-column:2;justify-self:center}
@@ -470,9 +554,9 @@ section{padding:clamp(80px,10vw,140px) 0}
   font-weight:400;
   letter-spacing:0;
   text-transform:none;
-  color:#9E4A35;
+  color:var(--wine);
   padding:6px 20px;
-  border:1px solid #9E4A35;
+  border:1px solid var(--wine);
   border-radius:100px;
 }
 @media(max-width:768px){
@@ -564,7 +648,6 @@ section{padding:clamp(80px,10vw,140px) 0}
 .contact-details{
   display:flex;gap:48px;justify-content:center;flex-wrap:wrap;
   padding-top:48px;
-  border-top:1px solid rgba(255,255,255,.1);
   font-size:.875rem;
   color:rgba(255,255,255,.5);
 }
@@ -582,6 +665,180 @@ section{padding:clamp(80px,10vw,140px) 0}
   margin-right:auto;
   line-height:1.6;
 }
+
+/* ─── Contact Form ─── */
+.contact-form{
+  max-width:480px;
+  margin:40px auto 0;
+  display:grid;
+  gap:16px;
+  text-align:left;
+}
+.contact-form label{
+  font-size:.75rem;
+  font-weight:500;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.5);
+  margin-bottom:4px;
+  display:block;
+}
+.contact-form input,
+.contact-form textarea,
+.contact-form select{
+  width:100%;
+  padding:14px 16px;
+  border:1.5px solid rgba(255,255,255,.15);
+  border-radius:10px;
+  background:rgba(255,255,255,.07);
+  color:#fff;
+  font-family:var(--sans);
+  font-size:.9375rem;
+  transition:border-color .3s var(--ease);
+  outline:none;
+}
+.contact-form input::placeholder,
+.contact-form textarea::placeholder{color:rgba(255,255,255,.3)}
+.contact-form input:focus,
+.contact-form textarea:focus,
+.contact-form select:focus{border-color:var(--wine)}
+.contact-form select option{color:var(--ink);background:#fff}
+.contact-form textarea{resize:vertical;min-height:100px}
+.contact-form .form-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+@media(max-width:480px){.contact-form .form-row{grid-template-columns:1fr}}
+.contact-form .form-consent{
+  font-size:.75rem;
+  color:rgba(255,255,255,.4);
+  line-height:1.5;
+  display:flex;
+  gap:8px;
+  align-items:flex-start;
+}
+.contact-form .form-consent input[type="checkbox"]{
+  width:16px;height:16px;
+  flex-shrink:0;
+  margin-top:2px;
+  accent-color:var(--wine);
+}
+.contact-form .form-consent a{
+  color:rgba(255,255,255,.6);
+  text-decoration:underline;
+  text-underline-offset:2px;
+}
+.form-submit{
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:100px;
+  background:var(--wine);
+  color:#fff;
+  font-size:1rem;
+  font-weight:500;
+  cursor:pointer;
+  transition:all .35s var(--ease);
+}
+.form-submit:hover{background:var(--wine-deep);transform:translateY(-1px)}
+.form-submit:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.form-success{
+  text-align:center;
+  padding:32px 0;
+  color:rgba(255,255,255,.8);
+  font-size:1.1rem;
+  display:none;
+}
+.form-success.show{display:block}
+.form-or{
+  text-align:center;
+  color:rgba(255,255,255,.3);
+  font-size:.8125rem;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  margin:8px 0;
+}
+
+/* ─── Cookie Banner ─── */
+.cookie-banner{
+  position:fixed;bottom:0;left:0;right:0;z-index:900;
+  background:var(--ink);
+  color:rgba(255,255,255,.8);
+  padding:16px 24px;
+  font-size:.8125rem;
+  line-height:1.5;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+  flex-wrap:wrap;
+  text-align:center;
+  box-shadow:0 -2px 20px rgba(0,0,0,.15);
+}
+.cookie-banner.show{display:flex}
+.cookie-banner a{color:rgba(255,255,255,.9);text-decoration:underline;text-underline-offset:2px}
+.cookie-banner a:hover{color:#fff}
+.cookie-btn{
+  padding:8px 24px;
+  border-radius:100px;
+  font-size:.8125rem;
+  font-weight:500;
+  cursor:pointer;
+  transition:all .3s var(--ease);
+  flex-shrink:0;
+}
+.cookie-accept{background:var(--wine);color:#fff;border:none}
+.cookie-accept:hover{background:var(--wine-deep)}
+
+/* ─── Privacy Modal ─── */
+.modal-overlay{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(0,0,0,.6);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  opacity:0;
+  transition:opacity .3s var(--ease);
+}
+.modal-overlay.active{display:flex;opacity:1}
+.modal-box{
+  background:#fff;
+  border-radius:16px;
+  max-width:720px;
+  width:100%;
+  max-height:80vh;
+  overflow-y:auto;
+  padding:clamp(24px,4vw,48px);
+  position:relative;
+}
+.modal-box h2{
+  font-family:var(--heading);
+  font-size:1.5rem;
+  margin-bottom:24px;
+  font-weight:500;
+}
+.modal-box h3{
+  font-family:var(--heading);
+  font-size:1.1rem;
+  margin:24px 0 8px;
+  font-weight:500;
+}
+.modal-box p,.modal-box li{
+  font-size:.875rem;
+  color:var(--muted);
+  line-height:1.7;
+  margin-bottom:8px;
+}
+.modal-box ul{list-style:disc;padding-left:20px;margin-bottom:16px}
+.modal-close{
+  position:absolute;top:16px;right:20px;
+  font-size:1.5rem;font-weight:300;
+  color:var(--muted);cursor:pointer;
+  line-height:1;transition:color .3s;
+}
+.modal-close:hover{color:var(--ink)}
 
 /* ─── Footer ─── */
 footer{
@@ -613,10 +870,9 @@ footer{
   .organic-images{grid-template-columns:1fr 1fr}
   .organic-images .img-tall{grid-row:span 1;aspect-ratio:1}
   .team-grid{grid-template-columns:1fr 1fr}
-  .hero{align-items:center;padding-bottom:0;text-align:center}
+  .hero{align-items:center;padding-bottom:0}
   .hero-content{max-width:100%}
-  .hero-desc{margin-left:auto;margin-right:auto}
-  .hero-actions{justify-content:center}
+  .hero-actions{flex-wrap:wrap}
 }
 @media(max-width:480px){
   .team-grid{grid-template-columns:1fr}
@@ -634,6 +890,7 @@ footer{
     <div class="nav-links" id="navLinks">
       <a href="#value">О визите</a>
       <a href="#journey">Экскурсия</a>
+      <a href="#gallery">Галерея</a>
       <a href="#pricing">Цены</a>
       <a href="#about">История</a>
       <a href="#faq">FAQ</a>
@@ -647,12 +904,17 @@ footer{
 
 <!-- ─── Hero ─── -->
 <section class="hero">
-  <div class="hero-bg" role="img" aria-label="Виноградник в Севастополе"></div>
+  <div class="hero-bg" role="img" aria-label="Виноградник в Севастополе">
+    <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=1920&q=80&auto=format">
+      <source src="video.mp4" type="video/mp4">
+    </video>
+  </div>
   <div class="wrap">
     <div class="hero-content">
       <span class="hero-tag">Севастополь · Органический виноградник</span>
-      <h1>Индивидуальная встреча с&nbsp;виноделом</h1>
-      <p class="hero-desc">2&nbsp;часа на&nbsp;частном винограднике: прогулка, дегустация 4–6&nbsp;образцов с&nbsp;закусками, вина в&nbsp;бутылках с&nbsp;собой. Компании до&nbsp;16&nbsp;человек.</p>
+      <h1>Индивидуальная экскурсия на&nbsp;винограднике</h1>
+      <p class="hero-desc">Прогулка с&nbsp;виноделом за&nbsp;рассказом о&nbsp;проекте, дегустация 4–5&nbsp;образцов с&nbsp;лёгкими закусками, вина в&nbsp;бутылках с&nbsp;собой.</p>
+      <p class="hero-desc" style="margin-bottom:36px;animation-delay:0.8s">Компания до&nbsp;16&nbsp;человек на&nbsp;открытой террасе<br>Компания до&nbsp;10&nbsp;человек в&nbsp;дегустационной</p>
       <div class="hero-actions">
         <a href="#contact" class="btn btn-primary">Записаться</a>
         <a href="#journey" class="btn btn-secondary" style="border-color:rgba(255,255,255,.5);color:#fff">Как проходит экскурсия</a>
@@ -666,42 +928,42 @@ footer{
   <div class="wrap">
     <div class="section-head reveal">
       <h2 class="section-title">Что вы получаете</h2>
-      <p class="section-sub">Не&nbsp;групповая экскурсия, а&nbsp;частный визит к&nbsp;виноделу — индивидуально под&nbsp;вас.</p>
+      <p class="section-sub">Вас ждёт не&nbsp;групповая экскурсия, а&nbsp;частный визит в&nbsp;дом винодела, где дегустация выстраивается под&nbsp;ваши пожелания.</p>
     </div>
     <div class="value-grid">
       <div class="value-item reveal">
         <div class="value-icon">①</div>
         <div>
-          <h3>Индивидуальный формат</h3>
-          <p>Только ваша компания. Никаких сборных групп и&nbsp;случайных попутчиков.</p>
+          <h3>Формат частного визита</h3>
+          <p>Только ваша компания, никаких сборных групп и&nbsp;случайных посетителей.</p>
         </div>
       </div>
       <div class="value-item reveal">
         <div class="value-icon">②</div>
         <div>
-          <h3>Подача под уровень гостей</h3>
-          <p>От&nbsp;новичков до&nbsp;профессионалов — программа адаптируется под ваш опыт и&nbsp;интерес.</p>
+          <h3>Подача рассказа под&nbsp;запрос</h3>
+          <p>Экскурсия подходит как для новичков, так и&nbsp;для профессионалов мира вина. Программа адаптируется под&nbsp;ваш интерес и&nbsp;опыт.</p>
         </div>
       </div>
       <div class="value-item reveal">
         <div class="value-icon">③</div>
         <div>
           <h3>Дегустация с&nbsp;закусками</h3>
-          <p>4–6&nbsp;образцов вина с&nbsp;подобранными закусками. Полноценный опыт, а&nbsp;не&nbsp;формальная проба.</p>
+          <p>4–5&nbsp;образцов вина с&nbsp;лёгкими закусками. Полноценный формат и&nbsp;гастрономические сочетания правильно подобранных сыров и&nbsp;мяса. В&nbsp;зависимости от&nbsp;сезона — также крымские овощи, ягоды и&nbsp;фрукты.</p>
         </div>
       </div>
       <div class="value-item reveal">
         <div class="value-icon">④</div>
         <div>
-          <h3>Вечер у&nbsp;винодела</h3>
-          <p>Домашняя атмосфера частного виноградника. Терраса, сад, лаванда — в&nbsp;зависимости от&nbsp;сезона.</p>
+          <h3>Гастрономический обед/ужин у&nbsp;винодела</h3>
+          <p>Домашняя атмосфера частного виноградника с&nbsp;приглашённым поваром. Терраса с&nbsp;видом на&nbsp;море, плодовый сад и&nbsp;лаванда — в&nbsp;зависимости от&nbsp;сезона.</p>
         </div>
       </div>
       <div class="value-item reveal">
         <div class="value-icon">⑤</div>
         <div>
           <h3>Вина с&nbsp;собой</h3>
-          <p>Полные бутылки, которые вы&nbsp;выбираете по&nbsp;итогам дегустации. Увозите впечатление.</p>
+          <p>Каждая бутылка открывается под&nbsp;гостей. Никаких коравинов и&nbsp;заранее открытых вин. Оставшиеся образцы вы&nbsp;забираете с&nbsp;собой и&nbsp;увозите свои дегустационные заметки и&nbsp;впечатления о&nbsp;вине.</p>
         </div>
       </div>
     </div>
@@ -713,47 +975,140 @@ footer{
   <div class="wrap">
     <div class="section-head reveal">
       <h2 class="section-title">Как проходит экскурсия</h2>
-      <p class="section-sub">Два часа, которые меняют представление о&nbsp;севастопольском вине.</p>
+      <p class="section-sub">2&nbsp;часа, которые меняют представление о&nbsp;крымском вине.</p>
     </div>
     <div class="journey-steps">
       <div class="journey-step reveal">
         <div class="step-marker"><div class="step-dot"></div><div class="step-line"></div></div>
         <div class="step-content">
-          <h3>Знакомство на террасе</h3>
-          <p>Встреча с&nbsp;Ириной. История пути от&nbsp;города к&nbsp;виноградарству. Панорама долины.</p>
+          <h3>Знакомство с&nbsp;историей винодела</h3>
+          <p>Длинный путь от&nbsp;учителя школы до&nbsp;винодела, учёба во&nbsp;Франции, переезд из&nbsp;Москвы в&nbsp;Крым.</p>
         </div>
       </div>
       <div class="journey-step reveal">
         <div class="step-marker"><div class="step-dot"></div><div class="step-line"></div></div>
         <div class="step-content">
-          <h3>Прогулка по винограднику</h3>
-          <p>Лозы, лаванда, сад — в&nbsp;зависимости от&nbsp;времени года. Как устроено органическое хозяйство и&nbsp;почему это важно.</p>
+          <h3>Прогулка по&nbsp;винограднику с&nbsp;бокалом вина</h3>
+          <p>Вам расскажут о&nbsp;том, что такое органический способ ведения виноградарства, ручной труд и&nbsp;почему это важно.</p>
         </div>
       </div>
       <div class="journey-step reveal">
         <div class="step-marker"><div class="step-dot"></div><div class="step-line"></div></div>
         <div class="step-content">
-          <h3>Органическое виноградарство</h3>
-          <p>Здоровая ягода без химии. Как получается вино, которое отражает почву и&nbsp;климат.</p>
+          <h3>Органическое хозяйство</h3>
+          <p>Здоровая ягода без химии. Как получается вино, которое отражает климат и&nbsp;почву местности. Собственные терруарные дрожжи для ферментации.</p>
         </div>
       </div>
       <div class="journey-step reveal">
         <div class="step-marker"><div class="step-dot"></div><div class="step-line"></div></div>
         <div class="step-content">
-          <h3>Аперитив на&nbsp;ходу</h3>
-          <p>Сезонный бокал среди виноградных рядов — если позволяет погода и&nbsp;настроение.</p>
-        </div>
-      </div>
-      <div class="journey-step reveal">
-        <div class="step-marker"><div class="step-dot"></div><div class="step-line"></div></div>
-        <div class="step-content">
-          <h3>Дегустация с&nbsp;закусками</h3>
-          <p>Терраса или домик. 4–6&nbsp;вин с&nbsp;историей каждого, технологией и&nbsp;подобранными закусками. Главное событие визита.</p>
+          <h3>Подробный рассказ о&nbsp;винах</h3>
+          <p>Дегустация на&nbsp;террасе или в&nbsp;дегустационной с&nbsp;панорамным видом на&nbsp;виноградники и&nbsp;море.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- ─── About ─── -->
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-image reveal">
+        <img src="img/novayabogovich.webp" alt="Ирина Богович — винодел" loading="lazy">
+      </div>
+      <div class="about-text reveal">
+        <h2 class="section-title">Ирина Богович</h2>
+        <p class="lead">«Первое погружение в&nbsp;виноделие у&nbsp;меня случилось в&nbsp;Севастополе, где я&nbsp;впервые увидела своими глазами, как под контролем профессионалов виноградный сок превращается в&nbsp;вино.»</p>
+        <p>Путь к&nbsp;созданию своего винодельческого проекта начался с&nbsp;окончания школы сомелье, практики на&nbsp;крымской винодельне, а&nbsp;затем учёбы в&nbsp;Бургундии. Далее последовали стажировки в&nbsp;Бордо, Венето и&nbsp;работа энологом-консультантом в&nbsp;Иль-де-Франс.</p>
+        <p>Сегодня — это небольшое хозяйство на&nbsp;Плато Кара-Тау между реками Бельбек и&nbsp;Кача, собственный виноградник, дегустационная с&nbsp;видом на&nbsp;море, лавандовое поле и&nbsp;плодовый сад.</p>
+        <p>Вина Ирины Богович продаются по&nbsp;всей России от&nbsp;Калининграда до&nbsp;Владивостока, преимущественно в&nbsp;бутиковых винотеках и&nbsp;лучших ресторанах страны.</p>
+        <p>Ирина выступает главным виноделом не&nbsp;только в&nbsp;своём проекте — она создаёт вина для корпоративных клиентов и&nbsp;частных заказчиков. А&nbsp;крестьянско-фермерское хозяйство «Богович» предоставляет услуги сервиса по&nbsp;уходу за&nbsp;виноградниками.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Wines ─── -->
+<section class="wines" id="wines">
+  <div class="wines-bg" role="img" aria-label="Вина Bogovich"></div>
+  <div class="wrap">
+    <div class="wines-content reveal">
+      <div class="section-head">
+        <h2 class="section-title">Вина</h2>
+        <p class="section-sub">Небольшие тиражи, ручной сбор, минимальное вмешательство. Каждая бутылка — отражение конкретного года и&nbsp;участка.</p>
+      </div>
+      <div class="wines-list">
+        <div class="wine-line">
+          <h3>Классическая линейка</h3>
+          <p>Моносортовые вина из&nbsp;органического винограда, созданные классическим способом с&nbsp;отголосками бургундского стиля. Длительная выдержка в&nbsp;дубе, тираж ограничен.</p>
+        </div>
+        <div class="wine-line">
+          <h3>ART-линейка</h3>
+          <p>Авторские эксперименты моносортовых и&nbsp;ассамбляжных вин: нестандартные решения по&nbsp;техникам, выбору сортов, соферментации, выдержке, с&nbsp;картинами московской художницы Ольги Картечиной на&nbsp;этикетках.</p>
+          <span class="tag">Лимитированная серия</span>
+        </div>
+        <div class="wine-line">
+          <h3>Игристое</h3>
+          <p>Новый проект — игристое вино, вдохновлённое русским балетом. Изящество, точность, праздник.</p>
+          <span class="tag">На выдержке</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Gallery ─── -->
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2 class="section-title">Фотографии с&nbsp;экскурсий</h2>
+      <p class="section-sub">Атмосфера виноградника, дегустации и&nbsp;закатов — глазами наших гостей.</p>
+    </div>
+  </div>
+  <div class="wrap" style="max-width:1200px">
+    <div class="gallery-grid reveal">
+      <div class="g-item g-wide" data-index="0">
+        <img src="img/IMG_0614.webp" alt="Дегустация на террасе с видом на виноградник" loading="lazy">
+      </div>
+      <div class="g-item" data-index="1">
+        <img src="img/IMG_0615.webp" alt="Пино Нуар — лоза на винограднике" loading="lazy">
+      </div>
+      <div class="g-item g-tall" data-index="2">
+        <img src="img/IMG_0621.webp" alt="Вино Bogovich на закате" loading="lazy">
+      </div>
+      <div class="g-item" data-index="3">
+        <img src="img/IMG_0616.webp" alt="Терраса для дегустаций" loading="lazy">
+      </div>
+      <div class="g-item" data-index="4">
+        <img src="img/IMG_0618.webp" alt="Урожай винограда в ящиках" loading="lazy">
+      </div>
+      <div class="g-item" data-index="5">
+        <img src="img/IMG_0619.webp" alt="Виноградник на закате с террасой" loading="lazy">
+      </div>
+      <div class="g-item g-wide" data-index="6">
+        <img src="img/IMG_0623.webp" alt="Лавандовое поле и терраса" loading="lazy">
+      </div>
+      <div class="g-item" data-index="7">
+        <img src="img/IMG_0620.webp" alt="Прогулка среди виноградных рядов" loading="lazy">
+      </div>
+      <div class="g-item" data-index="8">
+        <img src="img/IMG_0617.webp" alt="Терраса среди виноградника" loading="lazy">
+      </div>
+      <div class="g-item g-wide" data-index="9">
+        <img src="img/IMG_0624.webp" alt="Панорама виноградника на закате" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" id="lbClose">&times;</span>
+  <span class="lightbox-nav lightbox-prev" id="lbPrev">&#8249;</span>
+  <span class="lightbox-nav lightbox-next" id="lbNext">&#8250;</span>
+  <img src="" alt="" id="lbImg">
+</div>
 
 <!-- ─── Pricing ─── -->
 <section id="pricing">
@@ -779,8 +1134,8 @@ footer{
       <div class="pricing-block featured reveal">
         <span class="pricing-badge">С ужином</span>
         <h3>Экскурсия + гастро-ужин</h3>
-        <div class="pricing-price">от 16 000 ₽ <span style="font-size:.5em;font-weight:400;color:var(--muted)">/ чел.</span></div>
-        <p class="pricing-note">Расширенный формат с&nbsp;авторской кухней от&nbsp;повара.</p>
+        <div class="pricing-price">от 15 000 ₽ <span style="font-size:.5em;font-weight:400;color:var(--muted)">/ чел.</span></div>
+        <p class="pricing-note">Расширенный формат с&nbsp;авторской кухней от&nbsp;повара. От&nbsp;компании 4&nbsp;человека.</p>
         <ul class="pricing-includes">
           <li>Всё из&nbsp;базовой программы</li>
           <li>Гастро-ужин с&nbsp;поваром</li>
@@ -790,124 +1145,6 @@ footer{
           <li>По&nbsp;предварительной договорённости</li>
         </ul>
         <a href="#contact" class="btn btn-primary" style="width:100%;justify-content:center">Забронировать</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── About ─── -->
-<section class="about" id="about">
-  <div class="wrap">
-    <div class="about-grid">
-      <div class="about-image reveal">
-        <img src="https://images.unsplash.com/photo-1559662780-c3bab6f7e00b?w=800&q=80&auto=format" alt="Ирина Bogovich — винодел" loading="lazy">
-      </div>
-      <div class="about-text reveal">
-        <h2 class="section-title">Ирина Bogovich</h2>
-        <p class="lead">«Первое свидание с&nbsp;вином случилось не&nbsp;в&nbsp;бокале, а&nbsp;в&nbsp;почве. Я&nbsp;поняла, что хочу делать вино, когда впервые увидела, как лоза отвечает на&nbsp;заботу.»</p>
-        <p>Путь в&nbsp;виноделие начался нетипично — через консалтинг, Францию и&nbsp;бордоские практики. Потом — решение уйти из&nbsp;города и&nbsp;строить собственный виноградник в&nbsp;Севастополе.</p>
-        <p>Образование и&nbsp;опыт: стажировки в&nbsp;Бордо, консалтинг винодельческих проектов, органическое виноградарство с&nbsp;нуля. Сегодня — собственный виноградник, вина под маркой Bogovich и&nbsp;репутация одного из&nbsp;самых внимательных севастопольских виноделов.</p>
-        <p>Каждый визит — это встреча с&nbsp;человеком, который делает вино руками и&nbsp;головой. Не&nbsp;экскурсовод, а&nbsp;автор.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── Organic ─── -->
-<section id="organic">
-  <div class="wrap">
-    <div class="organic-grid">
-      <div class="organic-text reveal">
-        <h2 class="section-title">Органические Принципы</h2>
-        <p>Виноград растёт без пестицидов, гербицидов и&nbsp;искусственных удобрений. Это сложнее и&nbsp;дороже, но&nbsp;даёт вино с&nbsp;характером — честное отражение почвы, сезона и&nbsp;ручного труда.</p>
-        <p>Органика — это не&nbsp;маркетинг, а&nbsp;философия. Здоровая ягода даёт чистое сусло, минимум вмешательства в&nbsp;винодельне и&nbsp;вкус, который невозможно подделать.</p>
-        <ul class="organic-principles">
-          <li>Без пестицидов и&nbsp;гербицидов</li>
-          <li>Ручной уход за&nbsp;каждой лозой</li>
-          <li>Здоровая почва — основа вкуса</li>
-          <li>Минимальное вмешательство при производстве</li>
-          <li>Терруарность: вино = место + год</li>
-        </ul>
-      </div>
-      <div class="organic-images reveal">
-        <div class="img-tall">
-          <img src="https://images.unsplash.com/photo-1464638681168-8e513d42b8db?w=600&q=80&auto=format" alt="Работа на винограднике" loading="lazy">
-        </div>
-        <div class="img-sq">
-          <img src="https://images.unsplash.com/photo-1589461526563-3f7b0dc0c65d?w=400&q=80&auto=format" alt="Виноград на лозе" loading="lazy">
-        </div>
-        <div class="img-sq">
-          <img src="https://images.unsplash.com/photo-1597916829826-02e5bb4a54e0?w=400&q=80&auto=format" alt="Винодельня" loading="lazy">
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── Wines ─── -->
-<section class="wines" id="wines">
-  <div class="wines-bg" role="img" aria-label="Вина Bogovich"></div>
-  <div class="wrap">
-    <div class="wines-content reveal">
-      <div class="section-head">
-        <h2 class="section-title">Вина</h2>
-        <p class="section-sub">Небольшие тиражи, ручной сбор, минимальное вмешательство. Каждая бутылка — отражение конкретного года и&nbsp;участка.</p>
-      </div>
-      <div class="wines-list">
-        <div class="wine-line">
-          <h3>Классическая линейка</h3>
-          <p>Сортовые и&nbsp;ассамбляжные вина из&nbsp;органического винограда. Выдержка в&nbsp;дубе и&nbsp;стали, тираж ограничен.</p>
-        </div>
-        <div class="wine-line">
-          <h3>ART-линейка</h3>
-          <p>Авторские эксперименты: нестандартные сорта, необычная выдержка, коллаборации с&nbsp;художниками на&nbsp;этикетках.</p>
-          <span class="tag">Лимитированная серия</span>
-        </div>
-        <div class="wine-line">
-          <h3>Игристое</h3>
-          <p>Новый проект — игристое вино, вдохновлённое балетом. Изящество, точность, праздник.</p>
-          <span class="tag">В разработке</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── Team ─── -->
-<section id="team">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <h2 class="section-title">Команда</h2>
-      <p class="section-sub">Люди, которые делают Bogovich возможным — каждый день.</p>
-    </div>
-    <div class="team-grid">
-      <div class="team-member reveal">
-        <div class="team-photo">
-          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80&auto=format" alt="Ирина" loading="lazy">
-        </div>
-        <h3>Ирина</h3>
-        <p>Винодел, основатель</p>
-      </div>
-      <div class="team-member reveal">
-        <div class="team-photo">
-          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80&auto=format" alt="Оля" loading="lazy">
-        </div>
-        <h3>Оля</h3>
-        <p>Виноградарство, организация визитов</p>
-      </div>
-      <div class="team-member reveal">
-        <div class="team-photo">
-          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80&auto=format" alt="Лиза" loading="lazy">
-        </div>
-        <h3>Лиза</h3>
-        <p>Дегустации, работа с&nbsp;гостями</p>
-      </div>
-      <div class="team-member reveal">
-        <div class="team-photo">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80&auto=format" alt="Максим" loading="lazy">
-        </div>
-        <h3>Максим</h3>
-        <p>Винодельня, производство</p>
       </div>
     </div>
   </div>
@@ -936,14 +1173,6 @@ footer{
         <button class="faq-q">Можно ли новичкам?</button>
         <div class="faq-a"><p>Конечно. Программа адаптируется: от&nbsp;базового знакомства с&nbsp;вином до&nbsp;профессионального разбора. Вам не&nbsp;нужно ничего знать заранее.</p></div>
       </div>
-      <div class="faq-item reveal">
-        <button class="faq-q">Можно ли с&nbsp;детьми, за&nbsp;рулём или без алкоголя?</button>
-        <div class="faq-a"><p>Обсуждается индивидуально. Напишите нам, и&nbsp;мы&nbsp;подберём комфортный формат для вашей ситуации.</p></div>
-      </div>
-      <div class="faq-item reveal">
-        <button class="faq-q">Как добраться и&nbsp;где встречаемся?</button>
-        <div class="faq-a"><p>Точное место и&nbsp;маршрут присылаем после подтверждения записи. Виноградник находится в&nbsp;Севастополе, добраться удобно на&nbsp;автомобиле.</p></div>
-      </div>
     </div>
   </div>
 </section>
@@ -957,18 +1186,41 @@ footer{
     </div>
     <div class="contact-actions reveal">
       <a href="https://wa.me/" class="btn btn-primary">WhatsApp</a>
-      <a href="https://t.me/" class="btn btn-primary">Telegram</a>
+      <a href="https://t.me/bogovichwine" class="btn btn-primary">Telegram</a>
       <a href="tel:" class="btn btn-secondary">Позвонить</a>
+    </div>
+    <p class="form-or reveal">или оставьте заявку</p>
+    <form class="contact-form reveal" id="contactForm">
+      <!-- Honeypot — скрытое поле от ботов -->
+      <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
+      <div class="form-row">
+        <div>
+          <label for="fname">Имя</label>
+          <input type="text" id="fname" name="name" placeholder="Ваше имя" required>
+        </div>
+        <div>
+          <label for="fphone">Телефон</label>
+          <input type="tel" id="fphone" name="phone" placeholder="+7 (___) ___-__-__" required>
+        </div>
+      </div>
+      <div class="form-consent">
+        <input type="checkbox" id="fconsent" required>
+        <label for="fconsent" style="font-size:.75rem;color:rgba(255,255,255,.4);text-transform:none;letter-spacing:0;margin:0">Я&nbsp;согласен(а) на&nbsp;обработку <a href="#" onclick="openModal('privacyModal');return false">персональных данных</a> в&nbsp;соответствии с&nbsp;ФЗ&nbsp;№152</label>
+      </div>
+      <button type="submit" class="form-submit" id="formSubmit">Отправить заявку</button>
+    </form>
+    <div class="form-success reveal" id="formSuccess">
+      Спасибо! Ваша заявка отправлена.<br>Мы&nbsp;свяжемся с&nbsp;вами в&nbsp;течение дня.
     </div>
     <div class="contact-details reveal">
       <div>
-        <a href="https://yandex.ru/maps/" target="_blank" rel="noopener">Яндекс Карты →</a>
+        <a href="https://yandex.com/maps/org/bogovich_wine_vineyard/85789737079/?ll=33.638427%2C44.693067&z=11" target="_blank" rel="noopener">Яндекс Карты →</a>
       </div>
       <div>
-        <a href="https://maps.google.com/" target="_blank" rel="noopener">Google Maps →</a>
+        <a href="https://t.me/bogovichwine" target="_blank" rel="noopener">Telegram →</a>
       </div>
       <div>
-        <a href="mailto:info@bogovich.ru">info@bogovich.ru</a>
+        <a href="mailto:bogovich.wine@yandex.ru">bogovich.wine@yandex.ru</a>
       </div>
     </div>
     <p class="contact-rules reveal">Визит — по&nbsp;предварительной договорённости и&nbsp;предоплате. Мы&nbsp;готовим каждую встречу индивидуально, поэтому спонтанные визиты невозможны.</p>
@@ -977,8 +1229,100 @@ footer{
 
 <!-- ─── Footer ─── -->
 <footer>
-  <div class="wrap">© Bogovich, 2026</div>
+  <div class="wrap" style="display:flex;flex-direction:column;gap:8px;align-items:center">
+    <div>© Bogovich, 2026 · Сделано в&nbsp;<a href="https://redo.bureau" target="_blank" rel="noopener" style="color:rgba(255,255,255,.45);text-decoration:underline;text-underline-offset:2px">Redo Bureau</a></div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center">
+      <a href="#" onclick="openModal('privacyModal');return false" style="color:rgba(255,255,255,.35);text-decoration:underline;text-underline-offset:2px">Политика конфиденциальности</a>
+      <a href="#" onclick="openModal('agreementModal');return false" style="color:rgba(255,255,255,.35);text-decoration:underline;text-underline-offset:2px">Пользовательское соглашение</a>
+    </div>
+  </div>
 </footer>
+
+<!-- ─── Cookie Banner ─── -->
+<div class="cookie-banner" id="cookieBanner">
+  <span>Мы&nbsp;используем файлы cookie для улучшения работы сайта. Продолжая использовать сайт, вы&nbsp;соглашаетесь с&nbsp;<a href="#" onclick="openModal('privacyModal');return false">Политикой конфиденциальности</a> и&nbsp;обработкой персональных данных (ФЗ&nbsp;№152).</span>
+  <button class="cookie-btn cookie-accept" id="cookieAccept">Принять</button>
+</div>
+
+<!-- ─── Privacy Policy Modal ─── -->
+<div class="modal-overlay" id="privacyModal">
+  <div class="modal-box">
+    <span class="modal-close" onclick="closeModal('privacyModal')">&times;</span>
+    <h2>Политика конфиденциальности</h2>
+    <p><strong>Дата публикации:</strong> 15.04.2026</p>
+    <p>Настоящая Политика конфиденциальности определяет порядок обработки и&nbsp;защиты персональных данных пользователей сайта bogovich.wine (далее — «Сайт»), принадлежащего ИП&nbsp;Богович&nbsp;И.&nbsp;(далее — «Оператор»).</p>
+
+    <h3>1. Общие положения</h3>
+    <p>Оператор обрабатывает персональные данные в&nbsp;соответствии с&nbsp;Федеральным законом №152-ФЗ «О&nbsp;персональных данных» от&nbsp;27.07.2006. Использование сайта означает согласие пользователя с&nbsp;настоящей Политикой.</p>
+
+    <h3>2. Какие данные мы собираем</h3>
+    <ul>
+      <li>Имя, номер телефона, адрес электронной почты — при&nbsp;записи на&nbsp;визит</li>
+      <li>Данные об&nbsp;устройстве, IP-адрес, cookies — автоматически при&nbsp;посещении сайта</li>
+      <li>Сведения, передаваемые через мессенджеры (WhatsApp, Telegram) при&nbsp;обращении</li>
+    </ul>
+
+    <h3>3. Цели обработки</h3>
+    <ul>
+      <li>Организация и&nbsp;проведение экскурсий и&nbsp;дегустаций</li>
+      <li>Связь с&nbsp;пользователем для подтверждения записи</li>
+      <li>Улучшение работы сайта и&nbsp;качества обслуживания</li>
+      <li>Выполнение требований законодательства РФ</li>
+    </ul>
+
+    <h3>4. Правовые основания</h3>
+    <p>Обработка осуществляется на&nbsp;основании согласия субъекта персональных данных (п.&nbsp;1&nbsp;ч.&nbsp;1&nbsp;ст.&nbsp;6 ФЗ-152), а&nbsp;также в&nbsp;целях исполнения договора (п.&nbsp;5&nbsp;ч.&nbsp;1&nbsp;ст.&nbsp;6 ФЗ-152).</p>
+
+    <h3>5. Хранение и&nbsp;защита данных</h3>
+    <p>Персональные данные хранятся на&nbsp;территории Российской Федерации. Оператор принимает организационные и&nbsp;технические меры для защиты данных от&nbsp;неправомерного доступа, уничтожения, изменения и&nbsp;распространения.</p>
+
+    <h3>6. Передача данных третьим лицам</h3>
+    <p>Оператор не&nbsp;передаёт персональные данные третьим лицам, за&nbsp;исключением случаев, предусмотренных законодательством РФ, а&nbsp;также при&nbsp;использовании сервисов аналитики (Яндекс.Метрика и&nbsp;др.).</p>
+
+    <h3>7. Файлы cookie</h3>
+    <p>Сайт использует cookies для обеспечения корректной работы, аналитики и&nbsp;улучшения пользовательского опыта. Пользователь может отключить cookies в&nbsp;настройках браузера.</p>
+
+    <h3>8. Права пользователя</h3>
+    <p>Вы&nbsp;имеете право запросить информацию о&nbsp;ваших персональных данных, потребовать их&nbsp;изменения, блокировки или удаления, направив запрос на&nbsp;адрес <a href="mailto:bogovich.wine@yandex.ru">bogovich.wine@yandex.ru</a>.</p>
+
+    <h3>9. Срок хранения данных</h3>
+    <p>Персональные данные хранятся не&nbsp;дольше, чем этого требуют цели обработки, и&nbsp;удаляются по&nbsp;достижении целей или по&nbsp;запросу субъекта.</p>
+
+    <h3>10. Контакты</h3>
+    <p>По&nbsp;вопросам обработки персональных данных: <a href="mailto:bogovich.wine@yandex.ru">bogovich.wine@yandex.ru</a></p>
+  </div>
+</div>
+
+<!-- ─── User Agreement Modal ─── -->
+<div class="modal-overlay" id="agreementModal">
+  <div class="modal-box">
+    <span class="modal-close" onclick="closeModal('agreementModal')">&times;</span>
+    <h2>Пользовательское соглашение</h2>
+    <p><strong>Дата публикации:</strong> 15.04.2026</p>
+
+    <h3>1. Общие положения</h3>
+    <p>Настоящее Соглашение регулирует использование сайта bogovich.wine. Используя сайт, вы&nbsp;принимаете условия данного Соглашения в&nbsp;полном объёме.</p>
+
+    <h3>2. Предмет соглашения</h3>
+    <p>Оператор предоставляет пользователю доступ к&nbsp;информации об&nbsp;экскурсиях, дегустациях и&nbsp;винах Bogovich, а&nbsp;также возможность записи на&nbsp;визит через указанные каналы связи.</p>
+
+    <h3>3. Обязательства пользователя</h3>
+    <ul>
+      <li>Предоставлять достоверные данные при&nbsp;записи</li>
+      <li>Не&nbsp;использовать сайт в&nbsp;противоправных целях</li>
+      <li>Не&nbsp;копировать материалы сайта без согласия оператора</li>
+    </ul>
+
+    <h3>4. Интеллектуальная собственность</h3>
+    <p>Все материалы сайта (тексты, фотографии, дизайн, логотип) являются собственностью оператора и&nbsp;защищены законодательством РФ об&nbsp;интеллектуальной собственности.</p>
+
+    <h3>5. Ограничение ответственности</h3>
+    <p>Сайт предоставляется «как есть». Оператор не&nbsp;гарантирует бесперебойную работу сайта и&nbsp;не&nbsp;несёт ответственности за&nbsp;возможные технические сбои.</p>
+
+    <h3>6. Изменение условий</h3>
+    <p>Оператор вправе изменять условия Соглашения без предварительного уведомления. Актуальная версия всегда доступна на&nbsp;сайте.</p>
+  </div>
+</div>
 
 <script>
 const nav = document.getElementById('nav');
@@ -1007,12 +1351,131 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+// Gallery lightbox
+const galleryItems = document.querySelectorAll('.gallery-grid .g-item');
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbClose = document.getElementById('lbClose');
+const lbPrev = document.getElementById('lbPrev');
+const lbNext = document.getElementById('lbNext');
+const gallerySrcs = Array.from(galleryItems).map(item => item.querySelector('img').src);
+let currentLb = 0;
+
+function openLightbox(idx) {
+  currentLb = idx;
+  lbImg.src = gallerySrcs[idx];
+  lbImg.alt = galleryItems[idx].querySelector('img').alt;
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  lightbox.classList.remove('active');
+  document.body.style.overflow = '';
+}
+galleryItems.forEach(item => {
+  item.addEventListener('click', () => openLightbox(Number(item.dataset.index)));
+});
+lbClose.addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+lbPrev.addEventListener('click', (e) => { e.stopPropagation(); currentLb = (currentLb - 1 + gallerySrcs.length) % gallerySrcs.length; lbImg.src = gallerySrcs[currentLb]; });
+lbNext.addEventListener('click', (e) => { e.stopPropagation(); currentLb = (currentLb + 1) % gallerySrcs.length; lbImg.src = gallerySrcs[currentLb]; });
+document.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('active')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') { currentLb = (currentLb - 1 + gallerySrcs.length) % gallerySrcs.length; lbImg.src = gallerySrcs[currentLb]; }
+  if (e.key === 'ArrowRight') { currentLb = (currentLb + 1) % gallerySrcs.length; lbImg.src = gallerySrcs[currentLb]; }
+});
+
 document.querySelectorAll('.faq-item').forEach(item => {
   item.querySelector('.faq-q').addEventListener('click', () => {
     const wasOpen = item.classList.contains('open');
     document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
     if (!wasOpen) item.classList.add('open');
   });
+});
+
+// Phone mask +7 (___) ___-__-__
+const phoneInput = document.getElementById('fphone');
+phoneInput.addEventListener('focus', function() {
+  if (!this.value) this.value = '+7 (';
+});
+phoneInput.addEventListener('input', function(e) {
+  let digits = this.value.replace(/\D/g, '');
+  if (digits.length === 0) { this.value = ''; return; }
+  if (digits[0] === '8') digits = '7' + digits.slice(1);
+  if (digits[0] !== '7') digits = '7' + digits;
+  digits = digits.slice(0, 11);
+  let out = '+7';
+  if (digits.length > 1) out += ' (' + digits.slice(1, 4);
+  if (digits.length > 4) out += ') ' + digits.slice(4, 7);
+  if (digits.length > 7) out += '-' + digits.slice(7, 9);
+  if (digits.length > 9) out += '-' + digits.slice(9, 11);
+  this.value = out;
+});
+phoneInput.addEventListener('keydown', function(e) {
+  if (e.key === 'Backspace' && this.value.length <= 4) {
+    e.preventDefault();
+    this.value = '';
+  }
+});
+
+// Contact form
+const contactForm = document.getElementById('contactForm');
+const formSuccess = document.getElementById('formSuccess');
+contactForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('formSubmit');
+  btn.disabled = true;
+  btn.textContent = 'Отправляем...';
+  const data = new FormData(contactForm);
+  fetch('/send.php', {
+    method: 'POST',
+    body: data
+  }).then(r => r.json()).then(res => {
+    if (res.ok) {
+      contactForm.style.display = 'none';
+      formSuccess.classList.add('show');
+    } else {
+      btn.disabled = false;
+      btn.textContent = 'Попробовать снова';
+      alert(res.error || 'Ошибка отправки. Попробуйте написать нам в WhatsApp.');
+    }
+  }).catch(() => {
+    btn.disabled = false;
+    btn.textContent = 'Попробовать снова';
+    alert('Ошибка соединения. Попробуйте написать нам в WhatsApp.');
+  });
+});
+
+// Cookie banner
+const cookieBanner = document.getElementById('cookieBanner');
+const cookieAccept = document.getElementById('cookieAccept');
+if (!localStorage.getItem('cookieAccepted')) {
+  cookieBanner.classList.add('show');
+}
+cookieAccept.addEventListener('click', () => {
+  localStorage.setItem('cookieAccepted', 'true');
+  cookieBanner.classList.remove('show');
+});
+
+// Modals
+function openModal(id) {
+  document.getElementById(id).classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeModal(overlay.id);
+  });
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-overlay.active').forEach(m => closeModal(m.id));
+  }
 });
 </script>
 </body>
