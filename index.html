@@ -1204,7 +1204,9 @@ footer{
         </div>
       </div>
       <div class="form-consent">
-        <input type="checkbox" id="fconsent" required>
+        <input type="checkbox" id="fconsent" required
+          oninvalid="this.setCustomValidity('Пожалуйста, подтвердите согласие на обработку персональных данных')"
+          oninput="this.setCustomValidity('')">
         <label for="fconsent" style="font-size:.75rem;color:rgba(255,255,255,.4);text-transform:none;letter-spacing:0;margin:0">Я&nbsp;согласен(а) на&nbsp;обработку <a href="#" onclick="openModal('privacyModal');return false">персональных данных</a> в&nbsp;соответствии с&nbsp;ФЗ&nbsp;№152</label>
       </div>
       <button type="submit" class="form-submit" id="formSubmit">Отправить заявку</button>
