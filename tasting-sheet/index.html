@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Дегустационный лист — Bogovich</title>
+<style>
+@page{size:A5 portrait;margin:10mm}
+@media print{
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .no-print{display:none!important}
+  body{padding:0;margin:0;background:#fff!important}
+  .page{box-shadow:none!important;margin:0;background:#fff!important}
+}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --wine:#863C57;
+  --wine-light:#f3e8ec;
+  --ink:#1C1C1C;
+  --muted:#8A7E74;
+  --border:#ddd8d2;
+}
+body{
+  font-family:'Helvetica Neue',Arial,sans-serif;
+  font-size:9px;
+  color:var(--ink);
+  background:#e8e4e0;
+  line-height:1.35;
+  display:flex;
+  justify-content:center;
+  padding:24px;
+}
+.page{
+  width:148mm;
+  min-height:210mm;
+  background:#fff;
+  padding:8mm;
+  box-shadow:0 2px 20px rgba(0,0,0,.12);
+  overflow:hidden;
+}
+
+/* Header */
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding-bottom:10px;
+  margin-bottom:10px;
+  border-bottom:1.5px solid var(--wine);
+}
+.header-logo svg{
+  height:16px;
+  width:auto;
+  display:block;
+}
+.header-right{
+  display:flex;
+  gap:12px;
+  font-size:7.5px;
+  color:var(--muted);
+}
+.header-right .field{
+  border-bottom:1px solid var(--border);
+  min-width:55px;
+  display:inline-block;
+}
+
+/* Title */
+.sheet-title{
+  text-align:center;
+  font-size:10px;
+  font-weight:300;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:10px;
+}
+
+/* Wine cards */
+.wines{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px 20px;
+  margin-bottom:8px;
+}
+.wine-card{
+  border:none;
+  padding:6px 0 8px;
+  border-bottom:1px solid var(--border);
+}
+.wc-head{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-bottom:10px;
+  padding-bottom:4px;
+  border-bottom:1px solid var(--border);
+}
+.wc-num{
+  font-size:8px;
+  font-weight:700;
+  color:var(--wine);
+  flex-shrink:0;
+}
+.wc-name{
+  flex:1;
+  border-bottom:1px dotted var(--border);
+  font-size:8.5px;
+  padding-bottom:1px;
+  min-height:12px;
+}
+.wc-year{
+  font-size:7px;
+  color:var(--muted);
+  flex-shrink:0;
+}
+.wc-year .field{
+  border-bottom:1px solid var(--border);
+  min-width:24px;
+  display:inline-block;
+}
+
+/* Tasting rows */
+.tr{
+  margin-bottom:10px;
+}
+.tr-label{
+  font-size:6.5px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  color:var(--wine);
+  margin-bottom:3px;
+}
+.tr-opts{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:3px 6px;
+}
+.tr-opt{
+  font-size:7px;
+  padding:1px 0;
+  color:var(--ink);
+  line-height:1.4;
+  display:flex;
+  align-items:center;
+  gap:3px;
+  white-space:nowrap;
+  min-width:0;
+}
+.tr-opt::before{
+  content:'';
+  display:inline-block;
+  width:7px;height:7px;
+  border:1px solid var(--border);
+  border-radius:1.5px;
+  flex-shrink:0;
+}
+
+/* Notes */
+.wc-notes{
+  margin-top:10px;
+  padding-top:4px;
+  border-top:1px solid var(--border);
+}
+.wc-notes-area{
+  flex:1;
+  border-bottom:1px dotted var(--border);
+  min-height:16px;
+}
+
+/* Rating */
+.wc-rating{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:7px;
+}
+.wc-rating .tr-label{margin-bottom:0;margin-right:4px}
+.wc-rating-nums{
+  display:flex;
+  gap:10px;
+  font-size:8px;
+  color:var(--muted);
+  letter-spacing:.05em;
+}
+
+/* Footer */
+.footer{
+  border-top:1.5px solid var(--wine);
+  padding-top:8px;
+}
+.footer h3{
+  font-size:7px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  color:var(--wine);
+  margin-bottom:5px;
+}
+.f-lines{display:grid;gap:6px}
+.f-line{border-bottom:1px dotted var(--border);min-height:10px}
+.f-favs{display:grid;gap:3px}
+.f-fav{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  font-size:7.5px;
+  color:var(--muted);
+}
+.f-check{
+  width:9px;height:9px;
+  border:1px solid var(--border);
+  border-radius:1.5px;
+  flex-shrink:0;
+}
+
+/* Bottom */
+.bottom{
+  margin-top:10px;
+  text-align:center;
+  font-size:6px;
+  color:var(--muted);
+  letter-spacing:.04em;
+}
+.bottom a{color:var(--wine);text-decoration:none}
+
+/* Print button */
+.print-btn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:var(--wine);
+  color:#fff;
+  border:none;
+  padding:10px 24px;
+  border-radius:100px;
+  font-size:13px;
+  cursor:pointer;
+  box-shadow:0 4px 16px rgba(0,0,0,.2);
+  z-index:100;
+}
+.print-btn:hover{background:#701939}
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">Печать</button>
+
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1029.96 197.5"><defs><style>.st0{fill:#863C57}</style></defs><path class="st0" d="M30.88,60.89h14.04v88.78h-14.04V60.89Z"/><path class="st0" d="M80.74,117.65h-.12v32.01h-14.04V60.89h20.47c21.18,0,35.22,9.64,35.22,27.61,0,14.87-10.95,24.4-24.99,27.73l27.61,33.44h-17.26l-26.89-32.01ZM80.62,73.98v31.06h7.62c11.66,0,19.87-6.78,19.87-16.54,0-7.97-5.71-14.52-19.87-14.52h-7.62Z"/><path class="st0" d="M140.47,60.89h14.04v88.78h-14.04V60.89Z"/><path class="st0" d="M190.22,84.45v65.21h-14.04V60.89h14.04l46.17,65.09V60.89h14.04v88.78h-13.69l-46.53-65.21Z"/><path class="st0" d="M326.59,132.88h-41.77l-6.43,16.78h-14.52l35.11-88.78h13.92l34.99,88.78h-14.88l-6.43-16.78ZM322.07,121.22l-16.3-42.6-16.42,42.6h32.73Z"/><path class="st0" d="M401.68,149.66h-27.25V60.89h24.75c20.47,0,27.37,10.12,27.37,22.49,0,7.73-3.93,14.99-10.95,19.52,9.04,4.52,14.28,12.97,14.28,22.85,0,12.02-8.21,23.92-28.2,23.92ZM388.47,72.79v25.59h7.85c10.83,0,17.26-5.71,17.26-13.45,0-6.78-3.81-12.14-16.78-12.14h-8.33ZM388.47,109.68v28.08h10.12c13.21,0,17.02-6.54,17.14-13.57,0-8.93-6.54-14.52-17.61-14.52h-9.64Z"/><path class="st0" d="M533.53,105.15c0,26.18-21.3,47.36-48.43,47.36s-48.55-21.18-48.55-47.36,21.3-47.12,48.55-47.12,48.43,21.06,48.43,47.12ZM450.71,105.15c0,18.68,15.11,34.51,34.39,34.51s34.27-15.71,34.27-34.51-15.11-34.27-34.27-34.27-34.39,15.83-34.39,34.27Z"/><path class="st0" d="M588.39,152.52c-27.25,0-48.55-21.18-48.55-47.36s21.3-47.12,48.55-47.12c13.09,0,25.23,5,33.56,12.85l-9.64,9.52c-6.78-6.31-14.88-9.52-23.92-9.52-19.28,0-34.39,15.83-34.39,34.15s15.11,34.63,34.39,34.63c15.71,0,28.32-11.9,30.46-26.78l-27.97.12,5.47-12.5h37.01v5.12c0,25.7-19.75,46.89-44.98,46.89Z"/><path class="st0" d="M736.42,105.15c0,26.18-21.3,47.36-48.43,47.36s-48.55-21.18-48.55-47.36,21.3-47.12,48.55-47.12,48.43,21.06,48.43,47.12ZM653.6,105.15c0,18.68,15.11,34.51,34.39,34.51s34.27-15.71,34.27-34.51-15.11-34.27-34.27-34.27-34.39,15.83-34.39,34.27Z"/><path class="st0" d="M784.98,149.66h-15.11l-33.68-88.78h14.99l26.54,71.16,26.54-71.16h14.52l-33.8,88.78Z"/><path class="st0" d="M825.2,60.89h14.04v88.78h-14.04V60.89Z"/><path class="st0" d="M917.18,76.47c-5.71-3.69-12.38-5.59-19.52-5.59-19.64,0-35.11,16.07-35.11,34.15s15.47,34.63,35.11,34.63c7.14,0,13.8-2.02,19.52-5.59v13.92c-6.07,2.98-12.97,4.52-20.23,4.52-27.49,0-48.55-21.18-48.55-47.36s21.06-47.12,48.55-47.12c7.26,0,14.04,1.55,20.23,4.52v13.92Z"/><path class="st0" d="M927.42,60.89h14.04v35.23h38.68v-35.23h14.04v88.78h-14.04v-41.06h-38.68v41.06h-14.04V60.89Z"/></svg>
+    </div>
+    <div class="header-right">
+      <span>Дата: <span class="field"></span></span>
+      <span>Имя: <span class="field"></span></span>
+    </div>
+  </div>
+
+  <div class="sheet-title">Дегустационный лист</div>
+
+  <!-- Wine Cards -->
+  <div class="wines">
+
+    <div class="wine-card">
+      <div class="wc-head">
+        <span class="wc-num">1</span>
+        <span class="wc-name"></span>
+        <span class="wc-year">год <span class="field"></span></span>
+      </div>
+      <div class="tr"><span class="tr-label">Цвет</span><div class="tr-opts"><span class="tr-opt">соломенный</span><span class="tr-opt">золотистый</span><span class="tr-opt">розовый</span><span class="tr-opt">рубиновый</span><span class="tr-opt">гранатовый</span></div></div>
+      <div class="tr"><span class="tr-label">Аромат</span><div class="tr-opts"><span class="tr-opt">фрукты</span><span class="tr-opt">ягоды</span><span class="tr-opt">цветы</span><span class="tr-opt">специи</span><span class="tr-opt">дерево</span><span class="tr-opt">минералы</span></div></div>
+      <div class="tr"><span class="tr-label">Вкус</span><div class="tr-opts"><span class="tr-opt">сухое</span><span class="tr-opt">кислотное</span><span class="tr-opt">танинное</span><span class="tr-opt">округлое</span><span class="tr-opt">лёгкое</span><span class="tr-opt">полное</span></div></div>
+      <div class="wc-notes"><span class="tr-label">Заметки</span><div class="wc-notes-area"></div></div>
+      <div class="wc-rating"><span class="tr-label">Оценка</span><div class="wc-rating-nums"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div></div>
+    </div>
+
+    <div class="wine-card">
+      <div class="wc-head">
+        <span class="wc-num">2</span>
+        <span class="wc-name"></span>
+        <span class="wc-year">год <span class="field"></span></span>
+      </div>
+      <div class="tr"><span class="tr-label">Цвет</span><div class="tr-opts"><span class="tr-opt">соломенный</span><span class="tr-opt">золотистый</span><span class="tr-opt">розовый</span><span class="tr-opt">рубиновый</span><span class="tr-opt">гранатовый</span></div></div>
+      <div class="tr"><span class="tr-label">Аромат</span><div class="tr-opts"><span class="tr-opt">фрукты</span><span class="tr-opt">ягоды</span><span class="tr-opt">цветы</span><span class="tr-opt">специи</span><span class="tr-opt">дерево</span><span class="tr-opt">минералы</span></div></div>
+      <div class="tr"><span class="tr-label">Вкус</span><div class="tr-opts"><span class="tr-opt">сухое</span><span class="tr-opt">кислотное</span><span class="tr-opt">танинное</span><span class="tr-opt">округлое</span><span class="tr-opt">лёгкое</span><span class="tr-opt">полное</span></div></div>
+      <div class="wc-notes"><span class="tr-label">Заметки</span><div class="wc-notes-area"></div></div>
+      <div class="wc-rating"><span class="tr-label">Оценка</span><div class="wc-rating-nums"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div></div>
+    </div>
+
+    <div class="wine-card">
+      <div class="wc-head">
+        <span class="wc-num">3</span>
+        <span class="wc-name"></span>
+        <span class="wc-year">год <span class="field"></span></span>
+      </div>
+      <div class="tr"><span class="tr-label">Цвет</span><div class="tr-opts"><span class="tr-opt">соломенный</span><span class="tr-opt">золотистый</span><span class="tr-opt">розовый</span><span class="tr-opt">рубиновый</span><span class="tr-opt">гранатовый</span></div></div>
+      <div class="tr"><span class="tr-label">Аромат</span><div class="tr-opts"><span class="tr-opt">фрукты</span><span class="tr-opt">ягоды</span><span class="tr-opt">цветы</span><span class="tr-opt">специи</span><span class="tr-opt">дерево</span><span class="tr-opt">минералы</span></div></div>
+      <div class="tr"><span class="tr-label">Вкус</span><div class="tr-opts"><span class="tr-opt">сухое</span><span class="tr-opt">кислотное</span><span class="tr-opt">танинное</span><span class="tr-opt">округлое</span><span class="tr-opt">лёгкое</span><span class="tr-opt">полное</span></div></div>
+      <div class="wc-notes"><span class="tr-label">Заметки</span><div class="wc-notes-area"></div></div>
+      <div class="wc-rating"><span class="tr-label">Оценка</span><div class="wc-rating-nums"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div></div>
+    </div>
+
+    <div class="wine-card">
+      <div class="wc-head">
+        <span class="wc-num">4</span>
+        <span class="wc-name"></span>
+        <span class="wc-year">год <span class="field"></span></span>
+      </div>
+      <div class="tr"><span class="tr-label">Цвет</span><div class="tr-opts"><span class="tr-opt">соломенный</span><span class="tr-opt">золотистый</span><span class="tr-opt">розовый</span><span class="tr-opt">рубиновый</span><span class="tr-opt">гранатовый</span></div></div>
+      <div class="tr"><span class="tr-label">Аромат</span><div class="tr-opts"><span class="tr-opt">фрукты</span><span class="tr-opt">ягоды</span><span class="tr-opt">цветы</span><span class="tr-opt">специи</span><span class="tr-opt">дерево</span><span class="tr-opt">минералы</span></div></div>
+      <div class="tr"><span class="tr-label">Вкус</span><div class="tr-opts"><span class="tr-opt">сухое</span><span class="tr-opt">кислотное</span><span class="tr-opt">танинное</span><span class="tr-opt">округлое</span><span class="tr-opt">лёгкое</span><span class="tr-opt">полное</span></div></div>
+      <div class="wc-notes"><span class="tr-label">Заметки</span><div class="wc-notes-area"></div></div>
+      <div class="wc-rating"><span class="tr-label">Оценка</span><div class="wc-rating-nums"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div></div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div>
+      <h3>Общие впечатления</h3>
+      <div class="f-lines">
+        <div class="f-line"></div>
+        <div class="f-line"></div>
+        <div class="f-line"></div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+</body>
+</html>
