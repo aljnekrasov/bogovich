@@ -80,8 +80,8 @@ body{
 .wines{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:24px 20px;
-  margin-bottom:8px;
+  gap:10px 20px;
+  margin-bottom:4px;
 }
 .wine-card{
   border:none;
@@ -91,38 +91,40 @@ body{
 .wc-head{
   display:flex;
   align-items:center;
-  gap:6px;
+  gap:8px;
   margin-bottom:10px;
   padding-bottom:4px;
   border-bottom:1px solid var(--border);
 }
 .wc-num{
-  font-size:8px;
+  font-size:14px;
   font-weight:700;
   color:var(--wine);
   flex-shrink:0;
+  line-height:1;
 }
-.wc-name{
-  flex:1;
-  border-bottom:1px dotted var(--border);
-  font-size:8.5px;
-  padding-bottom:1px;
-  min-height:12px;
-}
-.wc-year{
-  font-size:7px;
+.wc-label{
+  width:40mm;
+  height:30mm;
+  border:1px dashed var(--border);
+  border-radius:2px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:6px;
   color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.08em;
   flex-shrink:0;
-}
-.wc-year .field{
-  border-bottom:1px solid var(--border);
-  min-width:24px;
-  display:inline-block;
+  margin-left:auto;
 }
 
-/* Tasting rows */
+/* Tasting fields */
 .tr{
-  margin-bottom:10px;
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+  margin-bottom:6px;
 }
 .tr-label{
   font-size:6.5px;
@@ -130,43 +132,18 @@ body{
   text-transform:uppercase;
   letter-spacing:.06em;
   color:var(--wine);
-  margin-bottom:3px;
-}
-.tr-opts{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:3px 6px;
-}
-.tr-opt{
-  font-size:7px;
-  padding:1px 0;
-  color:var(--ink);
-  line-height:1.4;
-  display:flex;
-  align-items:center;
-  gap:3px;
-  white-space:nowrap;
-  min-width:0;
-}
-.tr-opt::before{
-  content:'';
-  display:inline-block;
-  width:7px;height:7px;
-  border:1px solid var(--border);
-  border-radius:1.5px;
+  width:56px;
   flex-shrink:0;
+  padding-top:3px;
 }
-
-/* Notes */
-.wc-notes{
-  margin-top:10px;
-  padding-top:4px;
-  border-top:1px solid var(--border);
-}
-.wc-notes-area{
+.tr-lines{
   flex:1;
+  display:grid;
+  gap:11px;
+}
+.tr-line{
   border-bottom:1px dotted var(--border);
-  min-height:16px;
+  min-height:11px;
 }
 
 /* Rating */
@@ -174,14 +151,19 @@ body{
   display:flex;
   align-items:center;
   gap:8px;
-  margin-top:7px;
+  margin-top:6px;
+  padding-top:6px;
+  border-top:1px solid var(--border);
 }
-.wc-rating .tr-label{margin-bottom:0;margin-right:4px}
+.wc-rating .tr-label{
+  padding-top:0;
+}
 .wc-rating-nums{
   display:flex;
   gap:10px;
-  font-size:8px;
-  color:var(--muted);
+  font-size:9px;
+  font-weight:500;
+  color:var(--ink);
   letter-spacing:.05em;
 }
 
@@ -268,67 +250,55 @@ body{
     <div class="wine-card">
       <div class="wc-head">
         <span class="wc-num">1</span>
-        <span class="wc-name"></span>
-        <span class="wc-year">год <span class="field"></span></span>
+        <div class="wc-label">место для наклейки</div>
       </div>
-      <div class="tr"><span class="tr-label">Цвет</span><div class="tr-opts"><span class="tr-opt">соломенный</span><span class="tr-opt">золотистый</span><span class="tr-opt">розовый</span><span class="tr-opt">рубиновый</span><span class="tr-opt">гранатовый</span></div></div>
-      <div class="tr"><span class="tr-label">Аромат</span><div class="tr-opts"><span class="tr-opt">фрукты</span><span class="tr-opt">ягоды</span><span class="tr-opt">цветы</span><span class="tr-opt">специи</span><span class="tr-opt">дерево</span><span class="tr-opt">минералы</span></div></div>
-      <div class="tr"><span class="tr-label">Вкус</span><div class="tr-opts"><span class="tr-opt">сухое</span><span class="tr-opt">кислотное</span><span class="tr-opt">танинное</span><span class="tr-opt">округлое</span><span class="tr-opt">лёгкое</span><span class="tr-opt">полное</span></div></div>
-      <div class="wc-notes"><span class="tr-label">Заметки</span><div class="wc-notes-area"></div></div>
-      <div class="wc-rating"><span class="tr-label">Оценка</span><div class="wc-rating-nums"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div></div>
+      <div class="tr"><div class="tr-label">Название</div><div class="tr-lines"><div class="tr-line"></div></div></div>
+      <div class="tr"><div class="tr-label">Цвет</div><div class="tr-lines"><div class="tr-line"></div></div></div>
+      <div class="tr"><div class="tr-label">Аромат</div><div class="tr-lines"><div class="tr-line"></div></div></div>
+      <div class="tr"><div class="tr-label">Вкус</div><div class="tr-lines"><div class="tr-line"></div></div></div>
+      <div class="tr"><div class="tr-label">Впечатления</div><div class="tr-lines"><div class="tr-line"></div><div class="tr-line"></div><div class="tr-line"></div><div class="tr-line"></div><div class="tr-line"></div></div></div>
+      <div class="wc-rating"><div class="tr-label">Оценка</div><div class="wc-rating-nums"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div></div>
     </div>
 
     <div class="wine-card">
       <div class="wc-head">
         <span class="wc-num">2</span>
-        <span class="wc-name"></span>
-        <span class="wc-year">год <span class="field"></span></span>
+        <div class="wc-label">место для наклейки</div>
       </div>
-      <div class="tr"><span class="tr-label">Цвет</span><div class="tr-opts"><span class="tr-opt">соломенный</span><span class="tr-opt">золотистый</span><span class="tr-opt">розовый</span><span class="tr-opt">рубиновый</span><span class="tr-opt">гранатовый</span></div></div>
-      <div class="tr"><span class="tr-label">Аромат</span><div class="tr-opts"><span class="tr-opt">фрукты</span><span class="tr-opt">ягоды</span><span class="tr-opt">цветы</span><span class="tr-opt">специи</span><span class="tr-opt">дерево</span><span class="tr-opt">минералы</span></div></div>
-      <div class="tr"><span class="tr-label">Вкус</span><div class="tr-opts"><span class="tr-opt">сухое</span><span class="tr-opt">кислотное</span><span class="tr-opt">танинное</span><span class="tr-opt">округлое</span><span class="tr-opt">лёгкое</span><span class="tr-opt">полное</span></div></div>
-      <div class="wc-notes"><span class="tr-label">Заметки</span><div class="wc-notes-area"></div></div>
-      <div class="wc-rating"><span class="tr-label">Оценка</span><div class="wc-rating-nums"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div></div>
+      <div class="tr"><div class="tr-label">Название</div><div class="tr-lines"><div class="tr-line"></div></div></div>
+      <div class="tr"><div class="tr-label">Цвет</div><div class="tr-lines"><div class="tr-line"></div></div></div>
+      <div class="tr"><div class="tr-label">Аромат</div><div class="tr-lines"><div class="tr-line"></div></div></div>
+      <div class="tr"><div class="tr-label">Вкус</div><div class="tr-lines"><div class="tr-line"></div></div></div>
+      <div class="tr"><div class="tr-label">Впечатления</div><div class="tr-lines"><div class="tr-line"></div><div class="tr-line"></div><div class="tr-line"></div><div class="tr-line"></div><div class="tr-line"></div></div></div>
+      <div class="wc-rating"><div class="tr-label">Оценка</div><div class="wc-rating-nums"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div></div>
     </div>
 
     <div class="wine-card">
       <div class="wc-head">
         <span class="wc-num">3</span>
-        <span class="wc-name"></span>
-        <span class="wc-year">год <span class="field"></span></span>
+        <div class="wc-label">место для наклейки</div>
       </div>
-      <div class="tr"><span class="tr-label">Цвет</span><div class="tr-opts"><span class="tr-opt">соломенный</span><span class="tr-opt">золотистый</span><span class="tr-opt">розовый</span><span class="tr-opt">рубиновый</span><span class="tr-opt">гранатовый</span></div></div>
-      <div class="tr"><span class="tr-label">Аромат</span><div class="tr-opts"><span class="tr-opt">фрукты</span><span class="tr-opt">ягоды</span><span class="tr-opt">цветы</span><span class="tr-opt">специи</span><span class="tr-opt">дерево</span><span class="tr-opt">минералы</span></div></div>
-      <div class="tr"><span class="tr-label">Вкус</span><div class="tr-opts"><span class="tr-opt">сухое</span><span class="tr-opt">кислотное</span><span class="tr-opt">танинное</span><span class="tr-opt">округлое</span><span class="tr-opt">лёгкое</span><span class="tr-opt">полное</span></div></div>
-      <div class="wc-notes"><span class="tr-label">Заметки</span><div class="wc-notes-area"></div></div>
-      <div class="wc-rating"><span class="tr-label">Оценка</span><div class="wc-rating-nums"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div></div>
+      <div class="tr"><div class="tr-label">Название</div><div class="tr-lines"><div class="tr-line"></div></div></div>
+      <div class="tr"><div class="tr-label">Цвет</div><div class="tr-lines"><div class="tr-line"></div></div></div>
+      <div class="tr"><div class="tr-label">Аромат</div><div class="tr-lines"><div class="tr-line"></div></div></div>
+      <div class="tr"><div class="tr-label">Вкус</div><div class="tr-lines"><div class="tr-line"></div></div></div>
+      <div class="tr"><div class="tr-label">Впечатления</div><div class="tr-lines"><div class="tr-line"></div><div class="tr-line"></div><div class="tr-line"></div><div class="tr-line"></div><div class="tr-line"></div></div></div>
+      <div class="wc-rating"><div class="tr-label">Оценка</div><div class="wc-rating-nums"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div></div>
     </div>
 
     <div class="wine-card">
       <div class="wc-head">
         <span class="wc-num">4</span>
-        <span class="wc-name"></span>
-        <span class="wc-year">год <span class="field"></span></span>
+        <div class="wc-label">место для наклейки</div>
       </div>
-      <div class="tr"><span class="tr-label">Цвет</span><div class="tr-opts"><span class="tr-opt">соломенный</span><span class="tr-opt">золотистый</span><span class="tr-opt">розовый</span><span class="tr-opt">рубиновый</span><span class="tr-opt">гранатовый</span></div></div>
-      <div class="tr"><span class="tr-label">Аромат</span><div class="tr-opts"><span class="tr-opt">фрукты</span><span class="tr-opt">ягоды</span><span class="tr-opt">цветы</span><span class="tr-opt">специи</span><span class="tr-opt">дерево</span><span class="tr-opt">минералы</span></div></div>
-      <div class="tr"><span class="tr-label">Вкус</span><div class="tr-opts"><span class="tr-opt">сухое</span><span class="tr-opt">кислотное</span><span class="tr-opt">танинное</span><span class="tr-opt">округлое</span><span class="tr-opt">лёгкое</span><span class="tr-opt">полное</span></div></div>
-      <div class="wc-notes"><span class="tr-label">Заметки</span><div class="wc-notes-area"></div></div>
-      <div class="wc-rating"><span class="tr-label">Оценка</span><div class="wc-rating-nums"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div></div>
+      <div class="tr"><div class="tr-label">Название</div><div class="tr-lines"><div class="tr-line"></div></div></div>
+      <div class="tr"><div class="tr-label">Цвет</div><div class="tr-lines"><div class="tr-line"></div></div></div>
+      <div class="tr"><div class="tr-label">Аромат</div><div class="tr-lines"><div class="tr-line"></div></div></div>
+      <div class="tr"><div class="tr-label">Вкус</div><div class="tr-lines"><div class="tr-line"></div></div></div>
+      <div class="tr"><div class="tr-label">Впечатления</div><div class="tr-lines"><div class="tr-line"></div><div class="tr-line"></div><div class="tr-line"></div><div class="tr-line"></div><div class="tr-line"></div></div></div>
+      <div class="wc-rating"><div class="tr-label">Оценка</div><div class="wc-rating-nums"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div></div>
     </div>
 
-  </div>
-
-  <!-- Footer -->
-  <div class="footer">
-    <div>
-      <h3>Общие впечатления</h3>
-      <div class="f-lines">
-        <div class="f-line"></div>
-        <div class="f-line"></div>
-        <div class="f-line"></div>
-      </div>
-    </div>
   </div>
 
 
